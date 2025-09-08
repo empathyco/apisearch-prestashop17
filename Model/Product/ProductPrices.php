@@ -45,6 +45,10 @@ class ProductPrices
             $groupId = $context->getGroupId();
         }
 
+        if (!$userId && $context->getUserId()) {
+            $userId = $context->getUserId();
+        }
+
         $resolvedWithTax = $context->isWithTax();
         if (is_bool($withTax)) {
             $resolvedWithTax = $withTax;
