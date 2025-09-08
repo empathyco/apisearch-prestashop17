@@ -43,4 +43,5 @@ class ApisearchDefaults
     const AS_DEFAULT_ORDER_BY = 'id_desc';
     const AS_REAL_TIME_PRICES = false;
     const AS_GROUPS_SHOW_NO_TAX = '';
+    const AS_AVOID_REFERENCES = false;
 }

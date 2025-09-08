@@ -142,12 +142,21 @@ class ApisearchBuilder
         $outOfStock = $product['real_out_of_stock'] ?? 1;
         $isB2B = \Configuration::get('AS_B2B');
         $indexImagesPerColor = \Configuration::get('AS_INDEX_IMAGES_PER_COLOR');
+        $avoidReferences = \Configuration::get('AS_AVOID_REFERENCES');
 
-        $references = array($product['reference']);
+        if ($avoidReferences) {
+            $references = array();
+            $eans = array();
+            $upcs = array();
+            $mpns = array();
+        } else {
+            $references = array($product['reference']);
+            $eans = array($product['ean13']);
+            $upcs = array($product['upc']);
+            $mpns = array($product['mpn'] ?? null);
+        }
+
         $supplierReferences = $this->indexSupplierReferences ? $product['supplier_referencies'] : [];
-        $eans = array($product['ean13']);
-        $upcs = array($product['upc']);
-        $mpns = array($product['mpn'] ?? null);
         $img = $product['id_image'];
         $idProductAttribute = null;
         $categoriesName = array();
@@ -202,10 +211,12 @@ class ApisearchBuilder
             $minPrice = 99999999999;
             $maxPrice = -1;
             foreach ($combinations as $combination) {
-                $references[] = $combination['reference'] ?? null;
-                $eans[] = $combination['ean13'] ?? null;
-                $upcs[] = $combination['upc'] ?? null;
-                $mpns[] = $combination['mpn'] ?? null;
+                if (!$avoidReferences) {
+                    $references[] = $combination['reference'] ?? null;
+                    $eans[] = $combination['ean13'] ?? null;
+                    $upcs[] = $combination['upc'] ?? null;
+                    $mpns[] = $combination['mpn'] ?? null;
+                }
 
                 $combinationQuantity = \intval(($combination['quantity'] ?? 0));
                 $quantity += $combinationQuantity;

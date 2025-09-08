@@ -35,6 +35,8 @@ $_MODULE['<{apisearch}prestashop>apisearch_5f853e04d442c97ef1e10e03e9c377bc'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_188c0026d43a98849b74ab9619037c05'] = 'For each product displayed in the search engine, Apisearch will dynamically calculate the prices based on the user. This process requires using your Prestashop in real-time, which will directly affect search performance.';
 $_MODULE['<{apisearch}prestashop>apisearch_27e3b1c1c34fd90dad6f194bad153e34'] = 'Groups to display prices excluding VAT';
 $_MODULE['<{apisearch}prestashop>apisearch_3274fd9ead6b6ab50b1fc5f7c87ee1bc'] = 'Regardless of whether a group is configured with or without VAT, you can force users in that group to display prices excluding VAT in the search. This requires enabling real-time prices.';
+$_MODULE['<{apisearch}prestashop>apisearch_b9aadfebc1718fb9415b798ccccd28c7'] = 'Remove feed references';
+$_MODULE['<{apisearch}prestashop>apisearch_b67d55980a6d5b9e284065fd02cb892c'] = 'If you want to remove feed references for strategic purposes, you can do so from this option. The following fields are removed: ean, upc, mpn, reference. To also remove supplier references, explicitly disable the option.';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Yes';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';

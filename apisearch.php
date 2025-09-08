@@ -72,6 +72,7 @@ class Apisearch extends Module
         Configuration::updateValue('AS_ORDER_BY', ApisearchDefaults::AS_DEFAULT_ORDER_BY);
         Configuration::updateValue('AS_REAL_TIME_PRICES', ApisearchDefaults::AS_REAL_TIME_PRICES);
         Configuration::updateValue('AS_GROUPS_SHOW_NO_TAX', ApisearchDefaults::AS_GROUPS_SHOW_NO_TAX);
+        Configuration::updateValue('AS_AVOID_REFERENCES', ApisearchDefaults::AS_AVOID_REFERENCES);
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -101,6 +102,7 @@ class Apisearch extends Module
         Configuration::deleteByName('AS_ORDER_BY');
         Configuration::deleteByName('AS_REAL_TIME_PRICES');
         Configuration::deleteByName('AS_GROUPS_SHOW_NO_TAX');
+        Configuration::deleteByName('AS_AVOID_REFERENCES');
 
         return parent::uninstall();
     }
@@ -449,6 +451,26 @@ class Apisearch extends Module
                         'id' => 'id',
                         'name' => 'name'
                     )
+                ),
+                array(
+                    'col' => 3,
+                    'type' => 'switch',
+                    'label' => $this->l('avoid_references'),
+                    'name' => 'AS_AVOID_REFERENCES',
+                    'desc' => $this->l('avoid_references_help'),
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('yes')
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('no')
+                        )
+                    ),
                 )
             ),
             'buttons' => array(
@@ -491,6 +513,7 @@ class Apisearch extends Module
             'AS_ORDER_BY' => ApisearchOrderBy::getCurrentOrderBy(),
             'AS_REAL_TIME_PRICES' => Configuration::get('AS_REAL_TIME_PRICES'),
             'AS_GROUPS_SHOW_NO_TAX[]' => explode(',', Configuration::get('AS_GROUPS_SHOW_NO_TAX')),
+            'AS_AVOID_REFERENCES' => Configuration::get('AS_AVOID_REFERENCES'),
         );
 
         foreach ($this->context->controller->getLanguages() as $language) {

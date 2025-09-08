@@ -36,6 +36,9 @@ $_MODULE['<{apisearch}prestashop>apisearch_5f853e04d442c97ef1e10e03e9c377bc'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_188c0026d43a98849b74ab9619037c05'] = 'Para cada producto que se muestre en el buscador, Apisearch calculará los precios dinámicamente según el usuario. Este proceso requiere utilizar tu Prestashop en tiempo real, por lo que afectará directamente en la performance de la búsqueda.';
 $_MODULE['<{apisearch}prestashop>apisearch_27e3b1c1c34fd90dad6f194bad153e34'] = 'Grupos en los que visualizar precios sin IVA';
 $_MODULE['<{apisearch}prestashop>apisearch_3274fd9ead6b6ab50b1fc5f7c87ee1bc'] = 'Independientemente de que un grupo esté configurado con o sin IVA, puedes forzar que los usuarios de dicho grupo muestren los precios sin IVA en el buscador. Requiere de la activación de precios en tiempo real';
+$_MODULE['<{apisearch}prestashop>apisearch_b9aadfebc1718fb9415b798ccccd28c7'] = 'Eliminar referencias del feed';
+$_MODULE['<{apisearch}prestashop>apisearch_b67d55980a6d5b9e284065fd02cb892c'] = 'Si desea eliminar las referencias del feed con objetivos estratégicos, puede hacerlo desde esta opción. Se eliminan los siguientes campos: ean, upc, mpn, reference. Para suprimir también las referencias de proveedores, desactive explícitamente la opción.';
+
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';
