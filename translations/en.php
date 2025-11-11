@@ -37,6 +37,13 @@ $_MODULE['<{apisearch}prestashop>apisearch_27e3b1c1c34fd90dad6f194bad153e34'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_3274fd9ead6b6ab50b1fc5f7c87ee1bc'] = 'Regardless of whether a group is configured with or without VAT, you can force users in that group to display prices excluding VAT in the search. This requires enabling real-time prices.';
 $_MODULE['<{apisearch}prestashop>apisearch_b9aadfebc1718fb9415b798ccccd28c7'] = 'Remove feed references';
 $_MODULE['<{apisearch}prestashop>apisearch_b67d55980a6d5b9e284065fd02cb892c'] = 'If you want to remove feed references for strategic purposes, you can do so from this option. The following fields are removed: ean, upc, mpn, reference. To also remove supplier references, explicitly disable the option.';
+$_MODULE['<{apisearch}prestashop>apisearch_2b1433a34355ff3bc1996c14a839dd97'] = 'Number of rounding decimals';
+$_MODULE['<{apisearch}prestashop>apisearch_a7cab8b547c12af9989e7a08080f307b'] = 'Roundings will follow the symmetric rounding to the nearest logic.';
+$_MODULE['<{apisearch}prestashop>apisearch_43293f6c122d08bb90f71aef78b52f0b'] = 'No decimals. Integer values';
+$_MODULE['<{apisearch}prestashop>apisearch_31b4f1735df9c63d95be59637f18d41a'] = 'One decimal';
+$_MODULE['<{apisearch}prestashop>apisearch_8683fdb6150b57109e31d5046c45e104'] = 'Two decimals. Default value';
+$_MODULE['<{apisearch}prestashop>apisearch_172ad2e0ee8f74a50be7b45fea364a57'] = 'Three decimals';
+$_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 'Four decimals';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Yes';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';

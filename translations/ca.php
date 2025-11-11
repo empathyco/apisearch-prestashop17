@@ -37,7 +37,13 @@ $_MODULE['<{apisearch}prestashop>apisearch_27e3b1c1c34fd90dad6f194bad153e34'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_3274fd9ead6b6ab50b1fc5f7c87ee1bc'] = 'Independentment de si un grup està configurat amb o sense IVA, pots forçar que els usuaris d’aquest grup mostrin els preus sense IVA en el cercador. Requereix l’activació dels preus en temps real.';
 $_MODULE['<{apisearch}prestashop>apisearch_b9aadfebc1718fb9415b798ccccd28c7'] = 'Eliminar referències del feed';
 $_MODULE['<{apisearch}prestashop>apisearch_b67d55980a6d5b9e284065fd02cb892c'] = 'Si desitja eliminar les referències del feed amb objectius estrategics, ho pot fer desde aquesta opció. Es suprimeixen els següents camps: ean, upc, mpn, reference. Per a suprimir també les referències de proveïdors, desactiva éxplícitament l\'opció.';
-
+$_MODULE['<{apisearch}prestashop>apisearch_2b1433a34355ff3bc1996c14a839dd97'] = 'Número de decimals d\'arrodoniment';
+$_MODULE['<{apisearch}prestashop>apisearch_a7cab8b547c12af9989e7a08080f307b'] = 'Els arrodoniments es faran segons la lògica d\'arrodoniment simètric al més proper.';
+$_MODULE['<{apisearch}prestashop>apisearch_43293f6c122d08bb90f71aef78b52f0b'] = 'Cap decimal. Valors enters';
+$_MODULE['<{apisearch}prestashop>apisearch_31b4f1735df9c63d95be59637f18d41a'] = 'Un decimal';
+$_MODULE['<{apisearch}prestashop>apisearch_8683fdb6150b57109e31d5046c45e104'] = 'Dos decimals. Valor per defecte';
+$_MODULE['<{apisearch}prestashop>apisearch_172ad2e0ee8f74a50be7b45fea364a57'] = 'Tres decimals';
+$_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 'Quatre decimals';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';

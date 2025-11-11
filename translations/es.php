@@ -31,14 +31,19 @@ $_MODULE['<{apisearch}prestashop>apisearch_637c7cf48a31ea9cdc9496be9373da44'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_890a44bb38e82f7bfa0458465d1bb44f'] = 'Por stock';
 $_MODULE['<{apisearch}prestashop>apisearch_85c2dc7948fc1ae27a9254d86167589a'] = 'Por número total de ventas';
 $_MODULE['<{apisearch}prestashop>apisearch_da5b0d4e44328191769f083a2fde3bdb'] = 'Primero los actualizados recientemente';
-
 $_MODULE['<{apisearch}prestashop>apisearch_5f853e04d442c97ef1e10e03e9c377bc'] = 'Activar precios en tiempo real';
 $_MODULE['<{apisearch}prestashop>apisearch_188c0026d43a98849b74ab9619037c05'] = 'Para cada producto que se muestre en el buscador, Apisearch calculará los precios dinámicamente según el usuario. Este proceso requiere utilizar tu Prestashop en tiempo real, por lo que afectará directamente en la performance de la búsqueda.';
 $_MODULE['<{apisearch}prestashop>apisearch_27e3b1c1c34fd90dad6f194bad153e34'] = 'Grupos en los que visualizar precios sin IVA';
 $_MODULE['<{apisearch}prestashop>apisearch_3274fd9ead6b6ab50b1fc5f7c87ee1bc'] = 'Independientemente de que un grupo esté configurado con o sin IVA, puedes forzar que los usuarios de dicho grupo muestren los precios sin IVA en el buscador. Requiere de la activación de precios en tiempo real';
 $_MODULE['<{apisearch}prestashop>apisearch_b9aadfebc1718fb9415b798ccccd28c7'] = 'Eliminar referencias del feed';
 $_MODULE['<{apisearch}prestashop>apisearch_b67d55980a6d5b9e284065fd02cb892c'] = 'Si desea eliminar las referencias del feed con objetivos estratégicos, puede hacerlo desde esta opción. Se eliminan los siguientes campos: ean, upc, mpn, reference. Para suprimir también las referencias de proveedores, desactive explícitamente la opción.';
-
+$_MODULE['<{apisearch}prestashop>apisearch_2b1433a34355ff3bc1996c14a839dd97'] = 'Número de decimales de redondeo';
+$_MODULE['<{apisearch}prestashop>apisearch_a7cab8b547c12af9989e7a08080f307b'] = 'Los redondeos se harán según la lógica de redondeo simétrico al más cercano.';
+$_MODULE['<{apisearch}prestashop>apisearch_43293f6c122d08bb90f71aef78b52f0b'] = 'Sin decimales. Valores enteros';
+$_MODULE['<{apisearch}prestashop>apisearch_31b4f1735df9c63d95be59637f18d41a'] = 'Un decimal';
+$_MODULE['<{apisearch}prestashop>apisearch_8683fdb6150b57109e31d5046c45e104'] = 'Dos decimales. Valor por defecto';
+$_MODULE['<{apisearch}prestashop>apisearch_172ad2e0ee8f74a50be7b45fea364a57'] = 'Tres decimales';
+$_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 'Cuatro decimales';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';

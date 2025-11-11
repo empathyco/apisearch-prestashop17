@@ -27,6 +27,7 @@
 namespace Apisearch\Model\Product;
 
 use Apisearch\Context;
+use Apisearch\Model\ApisearchDefaults;
 
 class ProductPrices
 {
@@ -62,7 +63,8 @@ class ProductPrices
             $resolvedWithTax, 6, false, $reduction, false, $specPrice, true, $userId
         );
         $price = \Tools::convertPrice($price, $context->getCurrency());
-        $priceRounder = \round($price, 2);
+        $numberOfDecimals = \Configuration::get('AS_DEFAULT_ROUND_DECIMALS', null, null, null, ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS);
+        $priceRounder = \round($price, \intval($numberOfDecimals));
         $priceWithCurrency = \Tools::displayPrice($priceRounder, $context->getCurrency());
 
         return array($priceRounder, $priceWithCurrency, $price);

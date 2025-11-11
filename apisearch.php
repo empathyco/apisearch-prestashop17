@@ -73,6 +73,7 @@ class Apisearch extends Module
         Configuration::updateValue('AS_REAL_TIME_PRICES', ApisearchDefaults::AS_REAL_TIME_PRICES);
         Configuration::updateValue('AS_GROUPS_SHOW_NO_TAX', ApisearchDefaults::AS_GROUPS_SHOW_NO_TAX);
         Configuration::updateValue('AS_AVOID_REFERENCES', ApisearchDefaults::AS_AVOID_REFERENCES);
+        Configuration::updateValue('AS_DEFAULT_ROUND_DECIMALS', ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS);
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -103,6 +104,7 @@ class Apisearch extends Module
         Configuration::deleteByName('AS_REAL_TIME_PRICES');
         Configuration::deleteByName('AS_GROUPS_SHOW_NO_TAX');
         Configuration::deleteByName('AS_AVOID_REFERENCES');
+        Configuration::deleteByName('AS_DEFAULT_ROUND_DECIMALS');
 
         return parent::uninstall();
     }
@@ -471,6 +473,39 @@ class Apisearch extends Module
                             'label' => $this->l('no')
                         )
                     ),
+                ),
+                array(
+                    'col' => 3,
+                    'type' => 'select',
+                    'label' => $this->l('default_round_decimals'),
+                    'name' => 'AS_DEFAULT_ROUND_DECIMALS',
+                    'desc' => $this->l('default_round_decimals_help'),
+                    'options' => array(
+                        'query' => [
+                            array(
+                                'id' => '0',
+                                'name' => $this->l('zero_decimals')
+                            ),
+                            array(
+                                'id' => '1',
+                                'name' => $this->l('one_decimal')
+                            ),
+                            array(
+                                'id' => '2',
+                                'name' => $this->l('two_decimals')
+                            ),
+                            array(
+                                'id' => '3',
+                                'name' => $this->l('three_decimals')
+                            ),
+                            array(
+                                'id' => '4',
+                                'name' => $this->l('four_decimals')
+                            )
+                        ],
+                        'id' => 'id',
+                        'name' => 'name',
+                    ),
                 )
             ),
             'buttons' => array(
@@ -514,6 +549,7 @@ class Apisearch extends Module
             'AS_REAL_TIME_PRICES' => Configuration::get('AS_REAL_TIME_PRICES'),
             'AS_GROUPS_SHOW_NO_TAX[]' => explode(',', Configuration::get('AS_GROUPS_SHOW_NO_TAX')),
             'AS_AVOID_REFERENCES' => Configuration::get('AS_AVOID_REFERENCES'),
+            'AS_DEFAULT_ROUND_DECIMALS' => Configuration::get('AS_DEFAULT_ROUND_DECIMALS', null, null, null, ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS),
         );
 
         foreach ($this->context->controller->getLanguages() as $language) {

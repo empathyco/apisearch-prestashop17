@@ -30,7 +30,7 @@ class ApisearchDefaults
 {
     const DEFAULT_AS_ADMIN_URL = 'https://static.apisearch.cloud';
     const PLUGIN_NAME = 'apisearch';
-    const PLUGIN_VERSION = '2.3.6';
+    const PLUGIN_VERSION = '2.3.7';
     const DEFAULT_INDEX_PRODUCTS_WITHOUT_IMAGE = false;
     const DEFAULT_AS_INDEX_PRODUCT_PURCHASE_COUNT = true;
     const DEFAULT_AS_INDEX_PRODUCT_NO_STOCK = false;
@@ -44,4 +44,5 @@ class ApisearchDefaults
     const AS_REAL_TIME_PRICES = false;
     const AS_GROUPS_SHOW_NO_TAX = '';
     const AS_AVOID_REFERENCES = false;
+    const AS_DEFAULT_ROUND_DECIMALS = '2';
 }
