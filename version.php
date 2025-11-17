@@ -24,42 +24,20 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-set_time_limit(1800);
+use Apisearch\Model\ApisearchDefaults;
 
 /**
  * We suppress all possible incoming output data to avoid malformed feed
  */
 ob_start();
 
-use Apisearch\Model\ApisearchExporter;
-use Apisearch\Model\ApisearchBuilder;
-use Apisearch\Context;
-use Apisearch\Rates\Rating;
+require_once(dirname(__FILE__) . '../../../config/config.inc.php');
+require_once(dirname(__FILE__) . '../../../init.php');
+require_once __DIR__.'/vendor/autoload.php';
 
-try {
-    require_once(dirname(__FILE__) . '../../../config/config.inc.php');
-    require_once(dirname(__FILE__) . '../../../init.php');
-    require_once __DIR__.'/vendor/autoload.php';
+header('Access-Control-Allow-Origin: *');
+http_response_code(202);
 
-    require_once __DIR__ . '/apisearch.php';
-
-    ob_end_clean();
-    header('Content-Type:text/plain; charset=utf-8');
-
-    Rating::load();
-    $exporter = new ApisearchExporter(new ApisearchBuilder());
-
-    $context = Context::fromUrl();
-    Context::updatePrestashopContext($context);
-    $exporter->printItemsByShopAndLang($context);
-
-} catch (\Throwable $exception) {
-    http_response_code(404);
-    echo json_encode([
-        'error' => 1,
-        'message' => $exception->getMessage(),
-        'line' => $exception->getLine(),
-        'file' => $exception->getFile(),
-        'trace' => $exception->getTraceAsString(),
-    ]);
-}
+echo json_encode([
+    'version' => ApisearchDefaults::PLUGIN_VERSION,
+]);
