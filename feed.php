@@ -50,6 +50,16 @@ try {
     $exporter = new ApisearchExporter(new ApisearchBuilder());
 
     $context = Context::fromUrl();
+
+
+    if ($context->isDebug()) {
+        echo json_encode([
+            'debug' => 'Context loaded',
+        ]);
+        echo PHP_EOL;
+        ob_flush();
+    }
+
     Context::updatePrestashopContext($context);
     $exporter->printItemsByShopAndLang($context);
 

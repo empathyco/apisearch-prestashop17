@@ -74,6 +74,13 @@ class ApisearchExporter
 
                 $offset = $offset + $count;
             } else {
+                if ($context->isDebug()) {
+                    echo json_encode([
+                        'debug' => '0 products found',
+                    ]);
+                    echo PHP_EOL;
+                    ob_flush();
+                }
                 break;
             }
         }
