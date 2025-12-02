@@ -1,0 +1,55 @@
+<?php
+
+global $_MODULE;
+$_MODULE = array();
+$_MODULE['<{apisearch}prestashop>apisearch_2e5d8aa3dfa8ef34ca5131d20f9dad51'] = 'Configuración';
+$_MODULE['<{apisearch}prestashop>apisearch_06aa87356105700329a9636114d765a2'] = 'Activar o buscador na miña tenda';
+$_MODULE['<{apisearch}prestashop>apisearch_ec186d203e9a72d3bbef34250ed99cb9'] = 'ID do Índice';
+$_MODULE['<{apisearch}prestashop>apisearch_a41071261328cc8380ef9c12763e6fee'] = 'Indexar produtos sen imaxe';
+$_MODULE['<{apisearch}prestashop>apisearch_9ed94ae3bcdde1900ec69fd9d6e76b50'] = 'Indexar produtos non dispoñibles';
+$_MODULE['<{apisearch}prestashop>apisearch_26c44fd62f39aa0e883ca89f1a4eafab'] = 'Engadir número de vendas nos produtos';
+$_MODULE['<{apisearch}prestashop>apisearch_1a442debfe439990c007ba72d0b32beb'] = 'Crearemos unha representación das vendas do produto asignada a un valor do 0 ao 1000. En ningún momento enviaremos información real sobre as túas vendas.';
+$_MODULE['<{apisearch}prestashop>apisearch_494a99d5c7c4053e8fdb56f5130d512f'] = 'Engadir IDs de provedores';
+$_MODULE['<{apisearch}prestashop>apisearch_4036dd19fbe26f37e014bb88d89b41d4'] = 'Engadir descricións curtas';
+$_MODULE['<{apisearch}prestashop>apisearch_499e16b57c50fe993a5bcb5e687a8fc5'] = 'No caso de que nas túas descricións curtas haxa contexto importante do produto, activa esta opción. Engadir a descrición pode, en moitos casos, diminuír a eficiencia da procura e a calidade dos resultados.';
+$_MODULE['<{apisearch}prestashop>apisearch_05933fee152b09de4cc7007780958f2d'] = 'Engadir descricións longas';
+$_MODULE['<{apisearch}prestashop>apisearch_6f004d7ddcbfd3d973fa5ceacc6494ce'] = 'Podes indexar as descricións longas se o precisas. Este valor terá prioridade sobre a descrición curta se está seleccionada. Esta opción pode engadir moito texto irrelevante á procura e xerará long tail en todas as buscas, con ou sen resultados.';
+$_MODULE['<{apisearch}prestashop>apisearch_98ae660e070aac4118b4618ddb9134fd'] = 'Activar B2B';
+$_MODULE['<{apisearch}prestashop>apisearch_49279bc316963e9aff1db1460fd7526c'] = 'Mostra uns prezos ou outros no buscador dependendo do usuario que o visualiza e do grupo ao que pertence. Para probar, podes forzar a visualización para un grupo de usuarios engadindo o parámetro apisearch_group_id e/ou o parámetro apisearch_customer_id na URL.';
+$_MODULE['<{apisearch}prestashop>apisearch_cc386a578bf90387d4991c3a5b2d0fa7'] = 'Indexar imaxes por cor';
+$_MODULE['<{apisearch}prestashop>apisearch_448c00326fbf94b280405f07a079dc13'] = 'Se activas un filtro de cores no teu buscador, mostrarase a imaxe da cor filtrada. En caso contrario, sempre se mostrará a imaxe principal';
+$_MODULE['<{apisearch}prestashop>apisearch_4c2794db0c12899301ea956b99287a72'] = 'Mostrar prezos sen IVA';
+$_MODULE['<{apisearch}prestashop>apisearch_95177dc14299e2e57f993023ba664d6d'] = 'Excluir o IVA nos prezos do buscador. Este valor pódese sobrescribir na URL do feed engadindo o valor ao parámetro vat';
+$_MODULE['<{apisearch}prestashop>apisearch_60685f06115c0e958eecdaf859b21865'] = 'Agrupar variantes por cor';
+$_MODULE['<{apisearch}prestashop>apisearch_d42f1aac66ee5795ab8e9c52aa1cf910'] = 'Cada grupo de variantes co mesmo color será agrupado nun produto. A imaxe que se escollerá para cada un dos grupos será a imaxe da primeira variante do mesmo. Asegúrate de que todas as variantes co mesmo color teñen a mesma imaxe';
+$_MODULE['<{apisearch}prestashop>apisearch_460c2634eaaab84607728765982c055a'] = 'Tipo de imaxe';
+$_MODULE['<{apisearch}prestashop>apisearch_14de2d5b683041953b07bc51ef2f09e5'] = 'Por defecto, utilizarase a imaxe do tipo home_default. Cambia este valor se desexas cargar outro tipo de imaxe. Só seleccionables os tipos de imaxes asignadas aos produtos';
+$_MODULE['<{apisearch}prestashop>apisearch_da3ad3b4322b19b609e4fa9d0a98a97b'] = 'Ordenar produtos';
+$_MODULE['<{apisearch}prestashop>apisearch_a84a585e060373cbe0329749c5653c77'] = 'Orde por defecto dos produtos no buscador. Sen aplicar ningunha orde específica, os produtos enviarase a Apisearch ordenados segundo configuración. Ademais, en última instancia, cando dous produtos teñan a mesma puntuación, esta orde aplicarase tamén.';
+$_MODULE['<{apisearch}prestashop>apisearch_639f40c2a6a9dbeddc9114253f1ac580'] = 'Do máis vello ao máis novo';
+$_MODULE['<{apisearch}prestashop>apisearch_637c7cf48a31ea9cdc9496be9373da44'] = 'Do máis novo ao máis vello';
+$_MODULE['<{apisearch}prestashop>apisearch_890a44bb38e82f7bfa0458465d1bb44f'] = 'Por stock';
+$_MODULE['<{apisearch}prestashop>apisearch_85c2dc7948fc1ae27a9254d86167589a'] = 'Por número total de vendas';
+$_MODULE['<{apisearch}prestashop>apisearch_da5b0d4e44328191769f083a2fde3bdb'] = 'Primeiro os actualizados recentemente';
+$_MODULE['<{apisearch}prestashop>apisearch_5f853e04d442c97ef1e10e03e9c377bc'] = 'Activar prezos en tempo real';
+$_MODULE['<{apisearch}prestashop>apisearch_188c0026d43a98849b74ab9619037c05'] = 'Para cada produto que se amose no buscador, Apisearch calculará os prezos dinámicamente segundo o usuario. Este proceso require utilizar o teu Prestashop en tempo real, polo que afectará directamente o rendemento da procura.';
+$_MODULE['<{apisearch}prestashop>apisearch_27e3b1c1c34fd90dad6f194bad153e34'] = 'Grupos nos que visualizar prezos sen IVA';
+$_MODULE['<{apisearch}prestashop>apisearch_3274fd9ead6b6ab50b1fc5f7c87ee1bc'] = 'Independientemente de que un grupo estea configurado con ou sen IVA, podes forzar que os usuarios dese grupo amosen os prezos sen IVA no buscador. Requírese activar prezos en tempo real';
+$_MODULE['<{apisearch}prestashop>apisearch_b9aadfebc1718fb9415b798ccccd28c7'] = 'Eliminar referencias do feed';
+$_MODULE['<{apisearch}prestashop>apisearch_b67d55980a6d5b9e284065fd02cb892c'] = 'Se desexas eliminar as referencias do feed con obxectivos estratéxicos, podes facelo desde esta opción. Elimínanse os seguintes campos: ean, upc, mpn, reference. Para suprimir tamén as referencias de provedores, desactiva explícitamente a opción.';
+$_MODULE['<{apisearch}prestashop>apisearch_2b1433a34355ff3bc1996c14a839dd97'] = 'Número de decimais de redondeo';
+$_MODULE['<{apisearch}prestashop>apisearch_a7cab8b547c12af9989e7a08080f307b'] = 'Os redondeos faranse segundo a lóxica de redondeo simétrico ao máis próximo.';
+$_MODULE['<{apisearch}prestashop>apisearch_43293f6c122d08bb90f71aef78b52f0b'] = 'Sen decimais. Valores enteiros';
+$_MODULE['<{apisearch}prestashop>apisearch_31b4f1735df9c63d95be59637f18d41a'] = 'Un decimal';
+$_MODULE['<{apisearch}prestashop>apisearch_8683fdb6150b57109e31d5046c45e104'] = 'Dous decimais. Valor por defecto';
+$_MODULE['<{apisearch}prestashop>apisearch_172ad2e0ee8f74a50be7b45fea364a57'] = 'Tres decimais';
+$_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 'Catro decimais';
+$_MODULE['<{apisearch}prestashop>apisearch_564047cd84c7bdddc1af19409579ab4e'] = 'Activar JS asíncrono';
+$_MODULE['<{apisearch}prestashop>apisearch_d4697f5df02226be07ad57334c53c102'] = 'En algunhas webapps ou aplicacións móbiles detectamos problemas ao cargar JS externos. Esta opción permite normalizar a carga co noso script. Se sospeitas que poida haber algún problema, contacta connosco antes de activala.';
+
+$_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';
+$_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'Non';
+$_MODULE['<{apisearch}prestashop>apisearch_43781db5c40ecc39fd718685594f0956'] = 'Gardar';
+$_MODULE['<{apisearch}prestashop>apisearch_11500d04ea3917407ef54c840977b973'] = 'Panel de administración de Apisearch';
+
+$_MODULE['<{apisearch}prestashop>apisearch_62e5cde27ad49944de104bbe346fd8e8'] = 'Integra Apisearch na túa tenda para unha procura rápida e efectiva, mellorando así a experiencia dos teus usuarios e aumentando as túas vendas.';

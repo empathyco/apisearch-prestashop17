@@ -36,7 +36,7 @@ require_once(dirname(__FILE__) . '../../../init.php');
 require_once __DIR__.'/vendor/autoload.php';
 
 header('Access-Control-Allow-Origin: *');
-http_response_code(202);
+http_response_code(200);
 
 echo json_encode([
     'version' => ApisearchDefaults::PLUGIN_VERSION,

@@ -74,6 +74,7 @@ class Apisearch extends Module
         Configuration::updateValue('AS_GROUPS_SHOW_NO_TAX', ApisearchDefaults::AS_GROUPS_SHOW_NO_TAX);
         Configuration::updateValue('AS_AVOID_REFERENCES', ApisearchDefaults::AS_AVOID_REFERENCES);
         Configuration::updateValue('AS_DEFAULT_ROUND_DECIMALS', ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS);
+        Configuration::updateValue('AS_DYNAMIC_JS', ApisearchDefaults::AS_DYNAMIC_JS);
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -105,6 +106,7 @@ class Apisearch extends Module
         Configuration::deleteByName('AS_GROUPS_SHOW_NO_TAX');
         Configuration::deleteByName('AS_AVOID_REFERENCES');
         Configuration::deleteByName('AS_DEFAULT_ROUND_DECIMALS');
+        Configuration::deleteByName('AS_DYNAMIC_JS');
 
         return parent::uninstall();
     }
@@ -506,7 +508,27 @@ class Apisearch extends Module
                         'id' => 'id',
                         'name' => 'name',
                     ),
-                )
+                ),
+                array(
+                    'col' => 3,
+                    'type' => 'switch',
+                    'label' => $this->l('dynamic_js'),
+                    'name' => 'AS_DYNAMIC_JS',
+                    'desc' => $this->l('dynamic_js_help'),
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('yes')
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('no')
+                        )
+                    ),
+                ),
             ),
             'buttons' => array(
                 array(
@@ -550,6 +572,7 @@ class Apisearch extends Module
             'AS_GROUPS_SHOW_NO_TAX[]' => explode(',', Configuration::get('AS_GROUPS_SHOW_NO_TAX')),
             'AS_AVOID_REFERENCES' => Configuration::get('AS_AVOID_REFERENCES'),
             'AS_DEFAULT_ROUND_DECIMALS' => Configuration::get('AS_DEFAULT_ROUND_DECIMALS', null, null, null, ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS),
+            'AS_DYNAMIC_JS' => Configuration::get('AS_DYNAMIC_JS'),
         );
 
         foreach ($this->context->controller->getLanguages() as $language) {
@@ -624,6 +647,7 @@ class Apisearch extends Module
             'customer_id' => $currentIdCustomer,
             'base_url' => Context::getContext()->shop->getBaseURL(true),
             'real_time_prices' => Configuration::get('AS_REAL_TIME_PRICES') === "1",
+            'dynamic_js' => Configuration::get('AS_DYNAMIC_JS') === "1"
         ));
 
         return $this->display(__FILE__, 'views/templates/front/search.tpl');

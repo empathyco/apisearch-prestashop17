@@ -46,12 +46,21 @@
 </script>
 {/if}
 
-<link href="https://eu1.apisearch.cloud" rel="dns-prefetch" crossOrigin="anonymous">
-<script
-		type="application/javascript"
-		src='{$apisearch_admin_url}/{$apisearch_index_id}.layer.js?{$group_param}'
-		charSet='UTF-8'
-		async defer
-		crossOrigin="anonymous"
-></script>
-
+{if $dynamic_js}
+	<script>
+		const s = document.createElement('script');
+		s.src = '{$apisearch_admin_url}/{$apisearch_index_id}.layer.js?{$group_param}';
+		s.async = true;
+		s.defer = true;
+		document.head.appendChild(s);
+	</script>
+{else}
+	<link href="https://eu1.apisearch.cloud" rel="dns-prefetch" crossOrigin="anonymous">
+	<script
+			type="application/javascript"
+			src='{$apisearch_admin_url}/{$apisearch_index_id}.layer.js?{$group_param}'
+			charSet='UTF-8'
+			async defer
+			crossOrigin="anonymous"
+	></script>
+{/if}

@@ -56,6 +56,15 @@ class ApisearchProduct
             $orderBy
             LIMIT $start,$limit";
 
+        if ($context->isDebug()) {
+            echo json_encode([
+                'debug' => 'Products SQL',
+                'sql' => $sql
+            ]);
+            echo PHP_EOL;
+            ob_flush();
+        }
+
         return \Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql, true, false);
     }
 

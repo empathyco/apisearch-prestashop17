@@ -44,11 +44,14 @@ $_MODULE['<{apisearch}prestashop>apisearch_31b4f1735df9c63d95be59637f18d41a'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_8683fdb6150b57109e31d5046c45e104'] = 'Dos decimales. Valor por defecto';
 $_MODULE['<{apisearch}prestashop>apisearch_172ad2e0ee8f74a50be7b45fea364a57'] = 'Tres decimales';
 $_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 'Cuatro decimales';
+$_MODULE['<{apisearch}prestashop>apisearch_564047cd84c7bdddc1af19409579ab4e'] = 'Activar JS asíncrono';
+$_MODULE['<{apisearch}prestashop>apisearch_d4697f5df02226be07ad57334c53c102'] = 'En algunas webapps o aplicaciones móviles hemos detectado problemas al cargar JS externos. Esta opción permite normalizar la carga con nuestro script. Si sospechas que pueda haber algún problema, contacta con nosotros antes de activarla.';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';
 $_MODULE['<{apisearch}prestashop>apisearch_43781db5c40ecc39fd718685594f0956'] = 'Guardar';
 $_MODULE['<{apisearch}prestashop>apisearch_11500d04ea3917407ef54c840977b973'] = 'Panel de administración de Apisearch';
+
 
 
 $_MODULE['<{apisearch}prestashop>apisearch_62e5cde27ad49944de104bbe346fd8e8'] = 'Integra Apisearch en tu tienda para una búsqueda rápida y efectiva, mejorando así la experiencia de tus usuarios y aumentando tus ventas.';

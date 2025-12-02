@@ -44,6 +44,9 @@ $_MODULE['<{apisearch}prestashop>apisearch_31b4f1735df9c63d95be59637f18d41a'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_8683fdb6150b57109e31d5046c45e104'] = 'Two decimals. Default value';
 $_MODULE['<{apisearch}prestashop>apisearch_172ad2e0ee8f74a50be7b45fea364a57'] = 'Three decimals';
 $_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 'Four decimals';
+$_MODULE['<{apisearch}prestashop>apisearch_564047cd84c7bdddc1af19409579ab4e'] = 'Enable asynchronous JS';
+$_MODULE['<{apisearch}prestashop>apisearch_d4697f5df02226be07ad57334c53c102'] = 'On some webapps or mobile applications, we have encountered issues loading external JS. This is our way to normalize this situation with our script. If you suspect something might be happening, contact us before enabling this option.';
+
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Yes';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';
