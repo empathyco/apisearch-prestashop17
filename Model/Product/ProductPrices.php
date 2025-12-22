@@ -60,7 +60,7 @@ class ProductPrices
             $context->getShopId(), $productId, $idProductAttribute,
             $context->getIdCountry(), $context->getIdState(), $context->getZipcode(),
             $context->getCurrency()->id, $groupId, 1,
-            $resolvedWithTax, 6, false, $reduction, false, $specPrice, true, $userId
+            $resolvedWithTax, 6, false, $reduction, true, $specPrice, true, $userId
         );
         $price = \Tools::convertPrice($price, $context->getCurrency());
         $numberOfDecimals = \Configuration::get('AS_DEFAULT_ROUND_DECIMALS', null, null, null, ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS);
