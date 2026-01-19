@@ -48,9 +48,7 @@ try {
 
     Rating::load();
     $exporter = new ApisearchExporter(new ApisearchBuilder());
-
     $context = Context::fromUrl();
-
 
     if ($context->isDebug()) {
         echo json_encode([

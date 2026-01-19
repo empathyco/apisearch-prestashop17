@@ -559,6 +559,11 @@ class ApisearchBuilder
             return !empty($data);
         }));
 
+        $partialIds = \Configuration::get('AS_PARTIAL_IDS');
+        if ($partialIds) {
+            $itemAsArray['searchable_metadata']['ids'] = $itemAsArray['exact_matching_metadata'];
+        }
+
         if ($colorToFilterBy) {
             $itemAsArray['uuid']['id'] = $productId . '-' . trim($colorToFilterBy, '# ');
         }

@@ -100,7 +100,7 @@ class ApisearchProduct
                 LEFT JOIN {$prefix}image_lang iml ON im.id_image = iml.id_image AND iml.id_lang = $langId
                 " . ($context->isLoadSales() ? "LEFT JOIN {$prefix}product_sale psale ON (psale.id_product = p.id_product)" : "") . "
                 LEFT JOIN {$prefix}stock_available st ON (st.id_product = p.id_product)
-                " . ($context->isLoadSuppliers() ? "LEFT JOIN {$prefix}product_supplier psup ON (psup.id_product = psup.id_product)" : "") . "
+                " . ($context->isLoadSuppliers() ? "LEFT JOIN {$prefix}product_supplier psup ON (p.id_product = psup.id_product)" : "") . "
             WHERE p.id_product IN($productIdsAsString)
             GROUP BY p.id_product
             $orderBy

@@ -75,6 +75,7 @@ class Apisearch extends Module
         Configuration::updateValue('AS_AVOID_REFERENCES', ApisearchDefaults::AS_AVOID_REFERENCES);
         Configuration::updateValue('AS_DEFAULT_ROUND_DECIMALS', ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS);
         Configuration::updateValue('AS_DYNAMIC_JS', ApisearchDefaults::AS_DYNAMIC_JS);
+        Configuration::updateValue('AS_PARTIAL_IDS', ApisearchDefaults::AS_PARTIAL_IDS);
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -107,6 +108,7 @@ class Apisearch extends Module
         Configuration::deleteByName('AS_AVOID_REFERENCES');
         Configuration::deleteByName('AS_DEFAULT_ROUND_DECIMALS');
         Configuration::deleteByName('AS_DYNAMIC_JS');
+        Configuration::deleteByName('AS_PARTIAL_IDS');
 
         return parent::uninstall();
     }
@@ -529,6 +531,26 @@ class Apisearch extends Module
                         )
                     ),
                 ),
+                array(
+                    'col' => 3,
+                    'type' => 'switch',
+                    'label' => $this->l('partial_ids'),
+                    'name' => 'AS_PARTIAL_IDS',
+                    'desc' => $this->l('partial_ids_help'),
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('yes')
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('no')
+                        )
+                    ),
+                ),
             ),
             'buttons' => array(
                 array(
@@ -573,6 +595,7 @@ class Apisearch extends Module
             'AS_AVOID_REFERENCES' => Configuration::get('AS_AVOID_REFERENCES'),
             'AS_DEFAULT_ROUND_DECIMALS' => Configuration::get('AS_DEFAULT_ROUND_DECIMALS', null, null, null, ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS),
             'AS_DYNAMIC_JS' => Configuration::get('AS_DYNAMIC_JS'),
+            'AS_PARTIAL_IDS' => Configuration::get('AS_PARTIAL_IDS'),
         );
 
         foreach ($this->context->controller->getLanguages() as $language) {

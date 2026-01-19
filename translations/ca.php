@@ -46,6 +46,8 @@ $_MODULE['<{apisearch}prestashop>apisearch_172ad2e0ee8f74a50be7b45fea364a57'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 'Quatre decimals';
 $_MODULE['<{apisearch}prestashop>apisearch_564047cd84c7bdddc1af19409579ab4e'] = 'Activar JS asíncron';
 $_MODULE['<{apisearch}prestashop>apisearch_d4697f5df02226be07ad57334c53c102'] = 'En algunes webapps o aplicacions mòbils hem trobat problemes a l’hora de carregar JS externs. Aquesta és la nostra manera de normalitzar aquesta situació amb el nostre script. Si sospites que pugui passar alguna cosa, contacta amb nosaltres abans d’activar aquesta opció.';
+$_MODULE['<{apisearch}prestashop>apisearch_5a81228635fddf7c14755a3ed4a5d530'] = 'Cercar per IDs parcials';
+$_MODULE['<{apisearch}prestashop>apisearch_f9415ba7e47daa3c89f2cedfde6b1db0'] = 'Activant aquesta opció, es podrà cercar per les referències del producte i els seus valors parcials. Per exemple, el producte amb referència REF55265 podrà ser trobat per la parcial REF552';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';

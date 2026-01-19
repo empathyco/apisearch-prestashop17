@@ -47,6 +47,11 @@ $_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_564047cd84c7bdddc1af19409579ab4e'] = 'Activar JS asíncrono';
 $_MODULE['<{apisearch}prestashop>apisearch_d4697f5df02226be07ad57334c53c102'] = 'En algunas webapps o aplicaciones móviles hemos detectado problemas al cargar JS externos. Esta opción permite normalizar la carga con nuestro script. Si sospechas que pueda haber algún problema, contacta con nosotros antes de activarla.';
 
+$_MODULE['<{apisearch}prestashop>apisearch_5a81228635fddf7c14755a3ed4a5d530'] = 'Buscar por IDs parciales';
+$_MODULE['<{apisearch}prestashop>apisearch_f9415ba7e47daa3c89f2cedfde6b1db0'] = 'Activando esta opción, se podrá buscar por las referencias del producto y sus valores parciales. por ejemplo, el producto con referencia REF55265 podrá ser encontrada por la parcial REF552';
+
+
+
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';
 $_MODULE['<{apisearch}prestashop>apisearch_43781db5c40ecc39fd718685594f0956'] = 'Guardar';

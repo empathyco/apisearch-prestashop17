@@ -46,6 +46,8 @@ $_MODULE['<{apisearch}prestashop>apisearch_172ad2e0ee8f74a50be7b45fea364a57'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_183f016c77d57bb92a7da336e9a844e3'] = 'Four decimals';
 $_MODULE['<{apisearch}prestashop>apisearch_564047cd84c7bdddc1af19409579ab4e'] = 'Enable asynchronous JS';
 $_MODULE['<{apisearch}prestashop>apisearch_d4697f5df02226be07ad57334c53c102'] = 'On some webapps or mobile applications, we have encountered issues loading external JS. This is our way to normalize this situation with our script. If you suspect something might be happening, contact us before enabling this option.';
+$_MODULE['<{apisearch}prestashop>apisearch_5a81228635fddf7c14755a3ed4a5d530'] = 'Search by partial IDs';
+$_MODULE['<{apisearch}prestashop>apisearch_f9415ba7e47daa3c89f2cedfde6b1db0'] = 'By enabling this option, it will be possible to search by product references and their partial values. For example, the product with reference REF55265 can be found by the partial REF552';
 
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Yes';
