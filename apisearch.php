@@ -76,6 +76,7 @@ class Apisearch extends Module
         Configuration::updateValue('AS_DEFAULT_ROUND_DECIMALS', ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS);
         Configuration::updateValue('AS_DYNAMIC_JS', ApisearchDefaults::AS_DYNAMIC_JS);
         Configuration::updateValue('AS_PARTIAL_IDS', ApisearchDefaults::AS_PARTIAL_IDS);
+        Configuration::updateValue('AS_DEGRADE_NOT_AVAILABLE', ApisearchDefaults::AS_DEGRADE_NOT_AVAILABLE);
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -109,6 +110,7 @@ class Apisearch extends Module
         Configuration::deleteByName('AS_DEFAULT_ROUND_DECIMALS');
         Configuration::deleteByName('AS_DYNAMIC_JS');
         Configuration::deleteByName('AS_PARTIAL_IDS');
+        Configuration::deleteByName('AS_DEGRADE_NOT_AVAILABLE');
 
         return parent::uninstall();
     }
@@ -422,6 +424,26 @@ class Apisearch extends Module
                 array(
                     'col' => 3,
                     'type' => 'switch',
+                    'label' => $this->l('degrade_not_available'),
+                    'name' => 'AS_DEGRADE_NOT_AVAILABLE',
+                    'desc' => $this->l('degrade_not_available_help'),
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('yes')
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('no')
+                        )
+                    ),
+                ),
+                array(
+                    'col' => 3,
+                    'type' => 'switch',
                     'label' => $this->l('real_time_prices'),
                     'name' => 'AS_REAL_TIME_PRICES',
                     'desc' => $this->l('real_time_prices_help'),
@@ -590,6 +612,7 @@ class Apisearch extends Module
             'AS_GROUP_BY_COLOR' => Configuration::get('AS_GROUP_BY_COLOR'),
             'AS_IMAGE_FORMAT' => ApisearchImage::getCurrentImageType(),
             'AS_ORDER_BY' => ApisearchOrderBy::getCurrentOrderBy(),
+            'AS_DEGRADE_NOT_AVAILABLE' => Configuration::get('AS_DEGRADE_NOT_AVAILABLE'),
             'AS_REAL_TIME_PRICES' => Configuration::get('AS_REAL_TIME_PRICES'),
             'AS_GROUPS_SHOW_NO_TAX[]' => explode(',', Configuration::get('AS_GROUPS_SHOW_NO_TAX')),
             'AS_AVOID_REFERENCES' => Configuration::get('AS_AVOID_REFERENCES'),

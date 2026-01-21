@@ -34,7 +34,6 @@ use Apisearch\Rates\Rating;
 class ApisearchBuilder
 {
     private $avoidProductsWithoutImage;
-    private $indexProductPurchaseCount;
     private $indexProductNoStock;
     private $indexSupplierReferences;
 
@@ -43,7 +42,6 @@ class ApisearchBuilder
     public function __construct()
     {
         $this->avoidProductsWithoutImage = !\boolval(\Configuration::get('AS_INDEX_PRODUCTS_WITHOUT_IMAGE'));
-        $this->indexProductPurchaseCount = \boolval(\Configuration::get('AS_INDEX_PRODUCT_PURCHASE_COUNT'));
         $this->indexProductNoStock = \boolval(\Configuration::get('AS_INDEX_PRODUCT_NO_STOCK'));
         $this->indexSupplierReferences = \boolval(\Configuration::get('AS_FIELDS_SUPPLIER_REFERENCES'));
     }
@@ -543,8 +541,7 @@ class ApisearchBuilder
             );
         }
 
-        if ($this->indexProductPurchaseCount) {
-            // $itemAsArray['indexed_metadata']['quantity_sold'] = \intval($product['sales']); // Deprecated & Deleted. Use sales instead
+        if ($context->isLoadSales()) {
             $itemAsArray['indexed_metadata']['sales'] = \intval($product['sales']);
         }
 
@@ -561,7 +558,7 @@ class ApisearchBuilder
 
         $partialIds = \Configuration::get('AS_PARTIAL_IDS');
         if ($partialIds) {
-            $itemAsArray['searchable_metadata']['ids'] = $itemAsArray['exact_matching_metadata'];
+            $itemAsArray['exact_matching_metadata'] = $this->toPartialIds($itemAsArray['exact_matching_metadata']);
         }
 
         if ($colorToFilterBy) {
@@ -617,5 +614,27 @@ class ApisearchBuilder
     private static function toArrayOfStrings(array $array) : array
     {
         return array_values(array_map('strval', array_unique(array_filter($array))));
+    }
+
+    /**
+     * @param array<int, string|int> $ids
+     * @return string[]
+     */
+    public function toPartialIds(array $ids) : array
+    {
+        $partialIds = [];
+        foreach ($ids as $id) {
+            $id = strval($id);
+            $length = strlen($id);
+            if ($length < 2) {
+                $partialIds[] = $id;
+            } else {
+                for ($i = 2; $i <= $length; $i++) {
+                    $partialIds[] = substr($id, 0, $i);
+                }
+            }
+        }
+
+        return array_values(array_unique($partialIds));
     }
 }

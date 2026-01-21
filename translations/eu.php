@@ -48,6 +48,8 @@ $_MODULE['<{apisearch}prestashop>apisearch_564047cd84c7bdddc1af19409579ab4e'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_d4697f5df02226be07ad57334c53c102'] = 'Webapp edo mugikorretarako aplikazio batzuetan JS kanpokoak kargatzean arazoak aurkitu ditugu. Aukera honek gure scriptarekin karga normalizatzen du. Arazo bat egon daitekeen susmoa baduzu, jarri gurekin harremanetan aktibatu aurretik.';
 $_MODULE['<{apisearch}prestashop>apisearch_5a81228635fddf7c14755a3ed4a5d530'] = 'ID partzialen bidez bilatu';
 $_MODULE['<{apisearch}prestashop>apisearch_f9415ba7e47daa3c89f2cedfde6b1db0'] = 'Aukera hau aktibatuz gero, produktuaren erreferentziak eta haien balio partzialak bilatu ahal izango dira. Adibidez, REF55265 erreferentzia duen produktu bat REF552 partzialaren bidez aurki daiteke';
+$_MODULE['<{apisearch}prestashop>apisearch_0950e4c2b66c7965f30a0f517699976a'] = 'Ezin diren produktuak beheran jarri';
+$_MODULE['<{apisearch}prestashop>apisearch_d681b74ce63df54632ddb4e8d2159296'] = 'Saltzen ez diren produktuak azken posizioetara mugi. Aukera hau aldatzeak berriro indizatzeko beharra du';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Bai';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'Ez';

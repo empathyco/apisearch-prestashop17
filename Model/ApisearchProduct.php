@@ -47,8 +47,10 @@ class ApisearchProduct
         $sql = "
             SELECT DISTINCT(p.id_product)
             FROM {$prefix}product p
-                     INNER JOIN {$prefix}product_shop ps ON ps.id_product = p.id_product AND ps.id_shop = {$context->getShopId()}
-                     LEFT JOIN {$prefix}product_lang pl ON p.id_product = pl.id_product
+                INNER JOIN {$prefix}product_shop ps ON ps.id_product = p.id_product AND ps.id_shop = {$context->getShopId()}
+                LEFT JOIN {$prefix}product_lang pl ON p.id_product = pl.id_product
+                LEFT JOIN {$prefix}stock_available st ON (st.id_product = p.id_product)
+                LEFT JOIN {$prefix}product_sale psale ON (psale.id_product = p.id_product)
             WHERE
                 pl.`id_lang` = {$context->getLanguageId()} AND
                 ps.`visibility` IN ('both', 'search') AND
@@ -90,7 +92,7 @@ class ApisearchProduct
                 ps.advanced_stock_management,
                 im.id_image,
                 pl.*,
-                " . ($context->isLoadSales() ? 'psale.quantity as sales' : "0 as sales") .",
+                psale.quantity as sales,
                 st.out_of_stock as real_out_of_stock,
                 " . ($context->isLoadSuppliers() ? 'group_concat(distinct psup.product_supplier_reference SEPARATOR \'|\') as supplier_referencies' : "'' as supplier_referencies") ."
             FROM {$prefix}product p
@@ -98,7 +100,7 @@ class ApisearchProduct
                 LEFT JOIN {$prefix}product_lang `pl` ON p.`id_product` = pl.`id_product` AND pl.`id_lang` = $langId AND pl.`id_shop` = {$context->getShopId()}
                 LEFT JOIN {$prefix}image_shop im ON im.id_product = p.id_product AND im.cover = 1 AND im.`id_shop` = {$context->getShopId()}
                 LEFT JOIN {$prefix}image_lang iml ON im.id_image = iml.id_image AND iml.id_lang = $langId
-                " . ($context->isLoadSales() ? "LEFT JOIN {$prefix}product_sale psale ON (psale.id_product = p.id_product)" : "") . "
+                LEFT JOIN {$prefix}product_sale psale ON (psale.id_product = p.id_product)
                 LEFT JOIN {$prefix}stock_available st ON (st.id_product = p.id_product)
                 " . ($context->isLoadSuppliers() ? "LEFT JOIN {$prefix}product_supplier psup ON (p.id_product = psup.id_product)" : "") . "
             WHERE p.id_product IN($productIdsAsString)

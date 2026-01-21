@@ -32,7 +32,7 @@ class ApisearchOrderBy
         'id_asc' => 'ORDER BY p.id_product ASC',
         'id_desc' => 'ORDER BY p.id_product DESC',
         'stock' => 'ORDER BY st.quantity DESC, p.id_product DESC',
-        'sales' => 'ORDER BY sales DESC, p.id_product DESC',
+        'sales' => 'ORDER BY psale.quantity DESC, p.id_product DESC',
         'updated' => 'ORDER BY p.date_upd DESC, p.id_product DESC',
     ];
 
@@ -54,6 +54,12 @@ class ApisearchOrderBy
      */
     public static function getCurrentOrderByValue()
     {
-        return ApisearchOrderBy::ORDER_BY[ApisearchOrderBy::getCurrentOrderBy()];
+        $currentOrderBy = ApisearchOrderBy::ORDER_BY[ApisearchOrderBy::getCurrentOrderBy()];
+        $degradeNotAvailable = \Configuration::get('AS_DEGRADE_NOT_AVAILABLE');
+        if ($degradeNotAvailable) {
+            $currentOrderBy = str_replace('ORDER BY ', 'ORDER BY (st.quantity > 0) DESC, ', $currentOrderBy);
+        }
+
+        return $currentOrderBy;
     }
 }
