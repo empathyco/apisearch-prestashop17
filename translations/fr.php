@@ -50,6 +50,8 @@ $_MODULE['<{apisearch}prestashop>apisearch_5a81228635fddf7c14755a3ed4a5d530'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_f9415ba7e47daa3c89f2cedfde6b1db0'] = 'En activant cette option, il sera possible de rechercher par références produit et leurs valeurs partielles. Par exemple, le produit avec la référence REF55265 pourra être trouvé par le partiel REF552';
 $_MODULE['<{apisearch}prestashop>apisearch_0950e4c2b66c7965f30a0f517699976a'] = 'Dégrader les produits indisponibles';
 $_MODULE['<{apisearch}prestashop>apisearch_d681b74ce63df54632ddb4e8d2159296'] = 'Placez en dernière position les produits qui ne peuvent pas être vendus. Les modifications de cette option nécessitent une réindexation';
+$_MODULE['<{apisearch}prestashop>apisearch_1ee0fd5d781b764c853708c2b686ddf6'] = 'Indisponible lorsque le stock est à 0';
+$_MODULE['<{apisearch}prestashop>apisearch_80af7c41efc5e4c83862bc60a28a2582'] = 'Indépendamment des paramètres de la boutique en ligne, lorsqu’un produit a un stock de 0, marquez-le comme indisponible. Ce paramètre n’affecte que le moteur de recherche.';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Oui';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'Non';

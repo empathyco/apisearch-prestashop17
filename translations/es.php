@@ -48,9 +48,10 @@ $_MODULE['<{apisearch}prestashop>apisearch_564047cd84c7bdddc1af19409579ab4e'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_d4697f5df02226be07ad57334c53c102'] = 'En algunas webapps o aplicaciones móviles hemos detectado problemas al cargar JS externos. Esta opción permite normalizar la carga con nuestro script. Si sospechas que pueda haber algún problema, contacta con nosotros antes de activarla.';
 $_MODULE['<{apisearch}prestashop>apisearch_5a81228635fddf7c14755a3ed4a5d530'] = 'Buscar por IDs parciales';
 $_MODULE['<{apisearch}prestashop>apisearch_f9415ba7e47daa3c89f2cedfde6b1db0'] = 'Activando esta opción, se podrá buscar por las referencias del producto y sus valores parciales. por ejemplo, el producto con referencia REF55265 podrá ser encontrada por la parcial REF552';
-
 $_MODULE['<{apisearch}prestashop>apisearch_0950e4c2b66c7965f30a0f517699976a'] = 'Degrada los productos no disponibles';
 $_MODULE['<{apisearch}prestashop>apisearch_d681b74ce63df54632ddb4e8d2159296'] = 'Baja a las últimas posiciones los productos que no se puedan vender. Cambios en esta opción requiere reindexar de nuevo';
+$_MODULE['<{apisearch}prestashop>apisearch_1ee0fd5d781b764c853708c2b686ddf6'] = 'No disponible cuando el stock es 0';
+$_MODULE['<{apisearch}prestashop>apisearch_80af7c41efc5e4c83862bc60a28a2582'] = 'Independientemente de la configuración de la tienda online, cuando un producto tenga stock 0 márcalo como no disponible. Esta configuración solo afecta al buscador.';
 
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';

@@ -441,6 +441,13 @@ class ApisearchBuilder
             }
         }
 
+        // Stock && availability rectification
+        $treatNoStockAsNotAvailable = \Configuration::get('AS_STOCK_0_AS_NOT_AVAILABLE');
+        $realQuantity = \Product::getRealQuantity($productId);
+        if ($realQuantity === 0 && $treatNoStockAsNotAvailable) {
+            $available = false;
+        }
+
         $itemAsArray = array(
             'uuid' => array(
                 'id' => \strval($productId),
@@ -457,7 +464,7 @@ class ApisearchBuilder
                 'show_price' => ($productAvailableForOrder || $product['show_price']), // Checks if the price must be shown
                 'description' => $description,
                 'images_by_color' => $finalImagesByColor,
-                'stock' => \Product::getRealQuantity($productId)
+                'stock' => $realQuantity
             ),
             'indexed_metadata' => array_merge(array_filter(array(
                 'as_version' => \intval($version),
@@ -480,6 +487,7 @@ class ApisearchBuilder
             )), $frontFeaturesKeyFixed),
             'searchable_metadata' => array(
                 'name' => \strval($product['name']),
+                'application' => $product['application'] ?? '',
                 'categories' => $categoriesName,
                 'features' => self::toArrayOfStrings($frontFeaturesValues),
                 'description' => $description,

@@ -77,6 +77,7 @@ class Apisearch extends Module
         Configuration::updateValue('AS_DYNAMIC_JS', ApisearchDefaults::AS_DYNAMIC_JS);
         Configuration::updateValue('AS_PARTIAL_IDS', ApisearchDefaults::AS_PARTIAL_IDS);
         Configuration::updateValue('AS_DEGRADE_NOT_AVAILABLE', ApisearchDefaults::AS_DEGRADE_NOT_AVAILABLE);
+        Configuration::updateValue('AS_STOCK_0_AS_NOT_AVAILABLE', ApisearchDefaults::AS_STOCK_0_AS_NOT_AVAILABLE);
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -111,6 +112,7 @@ class Apisearch extends Module
         Configuration::deleteByName('AS_DYNAMIC_JS');
         Configuration::deleteByName('AS_PARTIAL_IDS');
         Configuration::deleteByName('AS_DEGRADE_NOT_AVAILABLE');
+        Configuration::deleteByName('AS_STOCK_0_AS_NOT_AVAILABLE');
 
         return parent::uninstall();
     }
@@ -573,6 +575,26 @@ class Apisearch extends Module
                         )
                     ),
                 ),
+                array(
+                    'col' => 3,
+                    'type' => 'switch',
+                    'label' => $this->l('stock_0_as_not_available'),
+                    'name' => 'AS_STOCK_0_AS_NOT_AVAILABLE',
+                    'desc' => $this->l('stock_0_as_not_available_help'),
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('yes')
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('no')
+                        )
+                    ),
+                ),
             ),
             'buttons' => array(
                 array(
@@ -619,6 +641,7 @@ class Apisearch extends Module
             'AS_DEFAULT_ROUND_DECIMALS' => Configuration::get('AS_DEFAULT_ROUND_DECIMALS', null, null, null, ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS),
             'AS_DYNAMIC_JS' => Configuration::get('AS_DYNAMIC_JS'),
             'AS_PARTIAL_IDS' => Configuration::get('AS_PARTIAL_IDS'),
+            'AS_STOCK_0_AS_NOT_AVAILABLE' => Configuration::get('AS_STOCK_0_AS_NOT_AVAILABLE'),
         );
 
         foreach ($this->context->controller->getLanguages() as $language) {
