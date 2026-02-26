@@ -444,6 +444,7 @@ class ApisearchBuilder
         // Stock && availability rectification
         $treatNoStockAsNotAvailable = \Configuration::get('AS_STOCK_0_AS_NOT_AVAILABLE');
         $realQuantity = \Product::getRealQuantity($productId);
+        $realAvailable = $available;
         if ($realQuantity === 0 && $treatNoStockAsNotAvailable) {
             $available = false;
         }
@@ -464,7 +465,8 @@ class ApisearchBuilder
                 'show_price' => ($productAvailableForOrder || $product['show_price']), // Checks if the price must be shown
                 'description' => $description,
                 'images_by_color' => $finalImagesByColor,
-                'stock' => $realQuantity
+                'stock' => $realQuantity,
+                'real_available' => $realAvailable,
             ),
             'indexed_metadata' => array_merge(array_filter(array(
                 'as_version' => \intval($version),
