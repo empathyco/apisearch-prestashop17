@@ -271,9 +271,10 @@ class ApisearchBuilder
 
             if (!$colorToFilterBy && $indexImagesPerColor) {
                 $combinationImages = ApisearchProduct::getImagesByProductAttributes(array_values($productAttributesId), $langId);
+                $defaultImageId = $product['id_image'];
                 foreach ($productAttributesId as $colorHex => $attributeId) {
                     $finalImagesByColor[ltrim($colorHex, '#')] = \Context::getContext()->link->getImageLink($product['link_rewrite'] ?? ApisearchDefaults::PLUGIN_NAME,
-                        $combinationImages[$attributeId]
+                        $combinationImages[$attributeId] ?? $defaultImageId
                         , $imageType);
                 }
             }
