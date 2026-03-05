@@ -201,8 +201,12 @@ class ApisearchBuilder
         $finalImagesByColor = array();
 
         $combinations = ApisearchProduct::getAttributeCombinations($productId, $langId, $colorToFilterBy);
+        var_dump($combinations);
+        $combinations = $this->buildCombinations($combinations);
+        var_dump($combinations);
         $hasCombinations = count($combinations) > 0;
         $productAttributesId = array();
+        $aggregatedFields = [];
         if ($hasCombinations) {
 
             $quantity = 0;
@@ -468,6 +472,7 @@ class ApisearchBuilder
                 'images_by_color' => $finalImagesByColor,
                 'stock' => $realQuantity,
                 'real_available' => $realAvailable,
+                '_aggregated_fields' => $aggregatedFields
             ),
             'indexed_metadata' => array_merge(array_filter(array(
                 'as_version' => \intval($version),
@@ -647,5 +652,38 @@ class ApisearchBuilder
         }
 
         return array_values(array_unique($partialIds));
+    }
+
+    /**
+     * @param array $combinations
+     * @return array
+     */
+    private function buildCombinations(array $combinations)
+    {
+        $realCombinations = [];
+        foreach ($combinations as $combination) {
+            $combinationGroupId = $combination['id_product_attribute'];
+            if (!isset($realCombinations[$combinationGroupId])) {
+                $realCombinations[$combinationGroupId] = [
+                    'id_product_attribute' => $combinationGroupId,
+                    'id_product' => $combination['id_product'],
+                    'reference' => $combination['reference'],
+                    'ean13' => $combination['ean13'],
+                    'isbn' => $combination['isbn'],
+                    'upc' => $combination['upc'],
+                    'mpn' => $combination['mpn'],
+                    'quantity' => $combination['quantity'],
+                    'id_image' => $combination['id_image'],
+                    'default_on' => $combination['default_on'] ?? false,
+                    'is_color_group' => $combination['is_color_group'] === "1",
+                    'attribute_color' => $combination['attribute_color'] === null,
+                    'attributes' => [],
+                ];
+            }
+
+            $realCombinations[$combinationGroupId]['attributes'][$combination['group_name']] = $combination['attribute_name'];
+        }
+
+        return $realCombinations;
     }
 }
