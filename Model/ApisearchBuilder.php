@@ -467,7 +467,6 @@ class ApisearchBuilder
                 'description' => $description,
                 'images_by_color' => $finalImagesByColor,
                 'stock' => $realQuantity,
-                'real_available' => $realAvailable,
             ),
             'indexed_metadata' => array_merge(array_filter(array(
                 'as_version' => \intval($version),
@@ -486,6 +485,7 @@ class ApisearchBuilder
                 'ean' => $eans,
                 'upc' => $upcs,
                 'mpn' => $mpns,
+                'real_available' => $realAvailable,
                 'date_add' => \DateTime::createFromFormat('Y-m-d H:i:s', $product['date_add'])->format('U'),
             )), $frontFeaturesKeyFixed),
             'searchable_metadata' => array(
