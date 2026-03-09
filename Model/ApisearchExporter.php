@@ -44,7 +44,6 @@ class ApisearchExporter
     {
         $count = 100;
         $offset = 0;
-        $version = \strval(rand(1000000000, 9999999999));
         usleep(100000);
 
         while (true) {
@@ -64,10 +63,23 @@ class ApisearchExporter
                     ob_flush();
                 }
 
-                $this->builder->buildChunkItems($productsIds, $version, $context, function(array $items) use (&$allItems) {
+                $this->builder->buildChunkItems($productsIds, $context, function(array $items) use ($context) {
                     foreach ($items as $item) {
-                        echo json_encode($item);
-                        echo PHP_EOL;
+                        $json = json_encode($item);
+                        if ($json === false) {
+                            if ($context->isDebug()) {
+                                echo json_encode([
+                                    'debug' => 'error on json_encode',
+                                    'error_msg' => json_last_error_msg(),
+                                ], JSON_PARTIAL_OUTPUT_ON_ERROR);
+                                echo PHP_EOL;
+                                ob_flush();
+                            }
+
+                            continue;
+                        }
+
+                        echo $json . PHP_EOL;
                         ob_flush();
                     }
                 });

@@ -48,7 +48,6 @@ class ApisearchBuilder
 
     /**
      * @param $productsId
-     * @param $version
      * @param Context $context
      * @param callable $flushCallable
      * @return void
@@ -57,7 +56,6 @@ class ApisearchBuilder
      */
     public function buildChunkItems(
         $productsId,
-        $version,
         Context $context,
         Callable $flushCallable
     )
@@ -70,36 +68,52 @@ class ApisearchBuilder
             }
         }
 
-        $items = array_filter(array_map(function($product) use ($version, $context) {
+        $items = array_filter(array_map(function($product) use ($context) {
             if ($context->printOnlyPSProducts()) {
                 echo json_encode($product);
                 echo PHP_EOL;
                 ob_flush();
             } else {
-                return $this->buildItemFromProduct($product, $version, $context);
+                return $this->buildItemFromProduct($product, $context);
             }
         }, $products));
 
         if ($context->isDebug()) {
+
+            $getIdsRecursively = function ($data) use (&$getIdsRecursively) {
+                $ids = [];
+                foreach ($data as $item) {
+                    if ($item === false) continue;
+
+                    if (isset($item['uuid']['id'])) {
+                        $ids[] = $item['uuid']['id'];
+                    } elseif (is_array($item)) {
+                        $ids = array_merge($ids, $getIdsRecursively($item));
+                    }
+                }
+                return $ids;
+            };
+
             echo json_encode([
                 'debug' => 'products transformed',
-                'ids' => array_values(array_map(function(array $item) {
-                    return $item['uuid']['id'];
-                }, $items))
+                'ids' => array_values($getIdsRecursively($items))
             ]);
             echo PHP_EOL;
             ob_flush();
         }
 
-        $items = array_filter($items);
+        $items = array_filter($items, fn($item) => $item !== false);
+        $items = array_values($items);
         $normalizedItems = array();
         foreach ($items as $item) {
             if (isset($item['uuid'])) {
                 $normalizedItems[] = $item;
-            } else {
-                $item = array_filter($item);
-                $normalizedItems = array_merge($normalizedItems, $item);
+                continue;
             }
+
+            $subItems = array_filter($item, fn($item) => $item !== false);
+            $subItems = array_values($subItems);
+            $normalizedItems = array_merge($normalizedItems, $subItems);
         }
 
         if (!empty($normalizedItems)) {
@@ -109,14 +123,13 @@ class ApisearchBuilder
 
     /**
      * @param $product
-     * @param $version
      * @param Context $context
      * @param $colorToFilterBy
      * @return array|array[]|\array[][]|false|false[]|\false[][]
      * @throws \PrestaShopDatabaseException
      * @throws \PrestaShopException
      */
-    public function buildItemFromProduct($product, $version, Context $context, $colorToFilterBy = null)
+    public function buildItemFromProduct($product, Context $context, $colorToFilterBy = null)
     {
         $productId = $product['id_product'];
         $langId = $context->getLanguageId();
@@ -129,8 +142,8 @@ class ApisearchBuilder
             $colors = ApisearchProduct::getProductAvailableColors($productId, $langId);
             $colors = array_filter($colors);
             if (count($colors) > 1) {
-                return array_map(function($color) use ($product, $version, $context) {
-                    return $this->buildItemFromProduct($product, $version, $context, $color);
+                return array_map(function($color) use ($product, $context) {
+                    return $this->buildItemFromProduct($product, $context, $color);
                 }, $colors);
             }
 
@@ -469,7 +482,6 @@ class ApisearchBuilder
                 'stock' => $realQuantity,
             ),
             'indexed_metadata' => array_merge(array_filter(array(
-                'as_version' => \intval($version),
                 'price' => $price,
                 'min_price' => $minPrice,
                 'max_price' => $maxPrice,
