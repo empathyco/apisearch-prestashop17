@@ -65,7 +65,7 @@ class ApisearchExporter
 
                 $this->builder->buildChunkItems($productsIds, $context, function(array $items) use ($context) {
                     foreach ($items as $item) {
-                        $json = json_encode($item);
+                        $json = json_encode($item, JSON_PARTIAL_OUTPUT_ON_ERROR);
                         if ($json === false) {
                             if ($context->isDebug()) {
                                 echo json_encode([
