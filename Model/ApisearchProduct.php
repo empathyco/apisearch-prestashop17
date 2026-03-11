@@ -235,20 +235,28 @@ class ApisearchProduct
 
         $prefix = _DB_PREFIX_;
         $sql = "
-            SELECT DISTINCT a.color
+            SELECT
+                MIN(pa.`id_product_attribute`) as id_combination,
+                a.`color`
             FROM {$prefix}product_attribute pa
             LEFT JOIN `{$prefix}product_attribute_combination` pac ON pac.`id_product_attribute` = pa.`id_product_attribute`
             LEFT JOIN `{$prefix}attribute` a ON a.`id_attribute` = pac.`id_attribute`
             LEFT JOIN `{$prefix}attribute_group` ag ON ag.`id_attribute_group` = a.`id_attribute_group`
             LEFT JOIN `{$prefix}attribute_lang` al ON (a.`id_attribute` = al.`id_attribute` AND al.`id_lang` = $idLang)
             LEFT JOIN `{$prefix}attribute_group_lang` agl ON (ag.`id_attribute_group` = agl.`id_attribute_group` AND agl.`id_lang` = $idLang)
-            WHERE pa.`id_product` = $productId";
+            WHERE pa.`id_product` = $productId
+            AND ag.is_color_group = 1
+            GROUP BY a.color
+            ";
 
-        $colors = \Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql, true, false);
+        $results = \Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql, true, false);
 
-        return array_map(function($color) {
-            return $color['color'];
-        }, $colors);
+        return array_map(function($row) {
+            return [
+                $row['id_combination'],
+                $row['color']
+            ];
+        }, $results);
     }
 
     /**

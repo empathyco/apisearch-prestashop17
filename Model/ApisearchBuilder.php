@@ -129,7 +129,7 @@ class ApisearchBuilder
      * @throws \PrestaShopDatabaseException
      * @throws \PrestaShopException
      */
-    public function buildItemFromProduct($product, Context $context, $colorToFilterBy = null)
+    public function buildItemFromProduct($product, Context $context, $colorToFilterBy = null, $colorCombinationId = null)
     {
         $productId = $product['id_product'];
         $langId = $context->getLanguageId();
@@ -142,8 +142,9 @@ class ApisearchBuilder
             $colors = ApisearchProduct::getProductAvailableColors($productId, $langId);
             $colors = array_filter($colors);
             if (count($colors) > 1) {
-                return array_map(function($color) use ($product, $context) {
-                    return $this->buildItemFromProduct($product, $context, $color);
+                return array_map(function(array $pair) use ($product, $context) {
+                    list ($colorCombinationId, $color) = $pair;
+                    return $this->buildItemFromProduct($product, $context, $color, $colorCombinationId);
                 }, $colors);
             }
 
@@ -597,8 +598,8 @@ class ApisearchBuilder
             $itemAsArray['exact_matching_metadata'] = $this->toPartialIds($itemAsArray['exact_matching_metadata']);
         }
 
-        if ($colorToFilterBy) {
-            $itemAsArray['uuid']['id'] = $productId . '-' . trim($colorToFilterBy, '# ');
+        if ($colorCombinationId) {
+            $itemAsArray['uuid']['id'] = $productId . '-' . $colorCombinationId;
         }
 
         return $itemAsArray;
