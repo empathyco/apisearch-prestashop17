@@ -275,11 +275,24 @@ class ApisearchBuilder
                 $maxPrice = null;
             }
 
-            // Only if we have stock, we are going to check availability
             if ($quantity > 0) {
+                // If stock > 0, we check real availability inside all variations
                 foreach ($combinations as $combination) {
-                    $available = $available || $this->getAvailability($productId, $productAvailableForOrder, $outOfStock, $combination['minimal_quantity'], $combination['id_product_attribute']);
+                    $available = $this->getAvailability(
+                        $productId,
+                        $productAvailableForOrder,
+                        $outOfStock,
+                        $combination['minimal_quantity'],
+                        $combination['id_product_attribute']
+                    );
+
+                    if ($available) {
+                        break;
+                    }
                 }
+            } else {
+                // If stock == 0, then we check availability
+                $available = $this->getAvailability($productId, $productAvailableForOrder, $outOfStock, $product['minimal_quantity']);
             }
 
             if (!$colorToFilterBy && $indexImagesPerColor) {
