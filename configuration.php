@@ -40,6 +40,7 @@ http_response_code(200);
 
 echo json_encode([
     'VERSION' => ApisearchDefaults::PLUGIN_VERSION,
+    'PHP_VERSION' => PHP_VERSION,
     'AS_DISPLAY_SEARCH_BAR' => Configuration::get('AS_DISPLAY_SEARCH_BAR'),
     'AS_CLUSTER_URL' => Configuration::get('AS_CLUSTER_URL'),
     'AS_ADMIN_URL' => Configuration::get('AS_ADMIN_URL'),

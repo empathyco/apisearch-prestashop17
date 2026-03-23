@@ -48,8 +48,8 @@ class ApisearchProduct
             SELECT DISTINCT(p.id_product)
             FROM {$prefix}product p
                 INNER JOIN {$prefix}product_shop ps ON ps.id_product = p.id_product AND ps.id_shop = {$context->getShopId()}
-                LEFT JOIN {$prefix}product_lang pl ON p.id_product = pl.id_product
-                LEFT JOIN {$prefix}stock_available st ON (st.id_product = p.id_product)
+                LEFT JOIN {$prefix}product_lang pl ON p.id_product = pl.id_product AND pl.id_shop = {$context->getShopId()}
+                LEFT JOIN {$prefix}stock_available st ON (st.id_product = p.id_product) AND st.id_shop = {$context->getShopId()}
                 LEFT JOIN {$prefix}product_sale psale ON (psale.id_product = p.id_product)
             WHERE
                 pl.`id_lang` = {$context->getLanguageId()} AND
@@ -262,15 +262,19 @@ class ApisearchProduct
     /**
      * @param $productId
      * @param $idLang
+     * @param $idShop
      * @param $colorToFilterBy
      * @return array|bool|\mysqli_result|\PDOStatement|resource
      * @throws \PrestaShopDatabaseException
      */
-    public static function getAttributeCombinations($productId, $idLang, $colorToFilterBy)
+    public static function getAttributeCombinations($productId, $idLang, $idShop, $colorToFilterBy)
     {
         if (!\Combination::isFeatureActive()) {
             return [];
         }
+
+        $productId = intval($productId);
+        $idLang = intval($idLang);
 
         $prefix = _DB_PREFIX_;
         $sql = "
@@ -285,6 +289,8 @@ class ApisearchProduct
                 pai.id_product_attribute as id_product_attribute_image,
                 i.id_image
             FROM {$prefix}product_attribute pa
+                INNER JOIN `{$prefix}product_attribute_shop` pas
+                    ON (pas.`id_product_attribute` = pa.`id_product_attribute` AND pas.`id_shop` = $idShop)
             LEFT JOIN `{$prefix}product_attribute_combination` pac ON pac.`id_product_attribute` = pa.`id_product_attribute`
             LEFT JOIN `{$prefix}attribute` a ON a.`id_attribute` = pac.`id_attribute`
             LEFT JOIN `{$prefix}attribute_group` ag ON ag.`id_attribute_group` = a.`id_attribute_group`

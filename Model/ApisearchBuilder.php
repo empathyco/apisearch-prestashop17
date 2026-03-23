@@ -102,7 +102,7 @@ class ApisearchBuilder
             ob_flush();
         }
 
-        $items = array_filter($items, fn($item) => $item !== false);
+        $items = Arr::filterItems($items);
         $items = array_values($items);
         $normalizedItems = array();
         foreach ($items as $item) {
@@ -111,7 +111,7 @@ class ApisearchBuilder
                 continue;
             }
 
-            $subItems = array_filter($item, fn($item) => $item !== false);
+            $subItems = Arr::filterItems($item);
             $subItems = array_values($subItems);
             $normalizedItems = array_merge($normalizedItems, $subItems);
         }
@@ -171,39 +171,12 @@ class ApisearchBuilder
         $supplierReferences = $this->indexSupplierReferences ? $product['supplier_referencies'] : [];
         $img = $product['id_image'];
         $idProductAttribute = null;
-        $categoriesName = array();
-        $categoriesDepth0 = array();
-        $categoriesDepth1 = array();
-        $categoriesDepth2 = array();
 
-        foreach ($product['categories_id'] as $categoryId) {
-            if ($categoryId == \Configuration::get('PS_ROOT_CATEGORY') || $categoryId == \Configuration::get('PS_HOME_CATEGORY')) {
-                continue;
-            }
-
-            $category = new \Category($categoryId, $langId);
-            if (\Validate::isLoadedObject($category)) {
-                $categories = $category->getParentsCategories($langId);
-                foreach ($categories as $innerCategory) {
-                    $innerCategory = new \Category($innerCategory['id_category'], $langId);
-                    if (\Validate::isLoadedObject($innerCategory)) {
-
-                        if ($innerCategory->active == "0") {
-                            continue;
-                        }
-
-                        if ($innerCategory->id == \Configuration::get('PS_ROOT_CATEGORY') || $innerCategory->id == \Configuration::get('PS_HOME_CATEGORY')) {
-                            continue;
-                        }
-
-                        $categoriesName[] = $innerCategory->name;
-                        if (\strval($innerCategory->level_depth) == "2") $categoriesDepth0[] = $innerCategory->name;
-                        elseif (\strval($innerCategory->level_depth) == "3") $categoriesDepth1[] = $innerCategory->name;
-                        elseif (\strval($innerCategory->level_depth) == "4") $categoriesDepth2[] = $innerCategory->name;
-                    }
-                }
-            }
-        }
+        $categoriesData = ApisearchCategories::getCategories($product['categories_id'], $context);
+        $categoriesName = $categoriesData['categories_name'];
+        $categoriesDepth0 = $categoriesData['categories_id_depth_0'];
+        $categoriesDepth1 = $categoriesData['categories_id_depth_1'];
+        $categoriesDepth2 = $categoriesData['categories_id_depth_2'];
 
         $attributes = array();
         $colors = array();
@@ -214,8 +187,15 @@ class ApisearchBuilder
         $maxPrice = null;
         $finalImagesByColor = array();
 
-        $combinations = ApisearchProduct::getAttributeCombinations($productId, $langId, $colorToFilterBy);
-        $hasCombinations = count($combinations) > 0;
+        $productShouldHaveCombinations = ($product['cache_default_attribute'] ?? 0) > 0;
+        $combinations = [];
+        $hasCombinations = false;
+
+        if ($productShouldHaveCombinations) {
+            $combinations = ApisearchProduct::getAttributeCombinations($productId, $langId, $context->getShopId(), $colorToFilterBy);
+            $hasCombinations = count($combinations) > 0;
+        }
+
         $productAttributesId = array();
         if ($hasCombinations) {
 
@@ -388,10 +368,10 @@ class ApisearchBuilder
             }
         }
 
-        $eans = self::toArrayOfStrings($eans);
-        $upcs = self::toArrayOfStrings($upcs);
-        $mpns = self::toArrayOfStrings($mpns);
-        $references = self::toArrayOfStrings($references);
+        $eans = Arr::toArrayOfStrings($eans);
+        $upcs = Arr::toArrayOfStrings($upcs);
+        $mpns = Arr::toArrayOfStrings($mpns);
+        $references = Arr::toArrayOfStrings($references);
         $categoriesName = array_values(array_unique(array_filter($categoriesName)));
 
         // If long description is enabled, return long description
@@ -482,20 +462,20 @@ class ApisearchBuilder
                 'id' => \strval($productId),
                 'type' => 'product'
             ),
-            'metadata' => array(
+            'metadata' => Arr::filterAssoc(array(
                 'title' => \strval($product['name']),
                 'url' => $url,
                 'image' => $image,
                 'old_price' => $oldPrice,
                 'old_price_with_currency' => $oldPriceWithCurrency,
                 'price_with_currency' => $priceWithCurrency,
-                'supplier_reference' => $supplierReferences,
+                'supplier_reference' => Arr::filterList($supplierReferences),
                 'show_price' => ($productAvailableForOrder || $product['show_price']), // Checks if the price must be shown
                 'description' => $description,
                 'images_by_color' => $finalImagesByColor,
                 'stock' => $realQuantity,
-            ),
-            'indexed_metadata' => array_merge(array_filter(array(
+            )),
+            'indexed_metadata' => array_merge(Arr::filterAssoc(array(
                 'price' => $price,
                 'min_price' => $minPrice,
                 'max_price' => $maxPrice,
@@ -518,7 +498,7 @@ class ApisearchBuilder
                 'name' => \strval($product['name']),
                 'application' => $product['application'] ?? '',
                 'categories' => $categoriesName,
-                'features' => self::toArrayOfStrings($frontFeaturesValues),
+                'features' => Arr::toArrayOfStrings($frontFeaturesValues),
                 'description' => $description,
                 'tags' => $product['tags'] ?? array()
             ),
@@ -595,7 +575,7 @@ class ApisearchBuilder
 
         $partialIds = \Configuration::get('AS_PARTIAL_IDS');
         if ($partialIds) {
-            $itemAsArray['exact_matching_metadata'] = $this->toPartialIds($itemAsArray['exact_matching_metadata']);
+            $itemAsArray['exact_matching_metadata'] = Arr::toPartialIds($itemAsArray['exact_matching_metadata']);
         }
 
         if ($colorCombinationId) {
@@ -642,36 +622,5 @@ class ApisearchBuilder
         }
 
         return true;
-    }
-
-    /**
-     * @param array $array
-     * @return array
-     */
-    private static function toArrayOfStrings(array $array) : array
-    {
-        return array_values(array_map('strval', array_unique(array_filter($array))));
-    }
-
-    /**
-     * @param array<int, string|int> $ids
-     * @return string[]
-     */
-    public function toPartialIds(array $ids) : array
-    {
-        $partialIds = [];
-        foreach ($ids as $id) {
-            $id = strval($id);
-            $length = strlen($id);
-            if ($length < 2) {
-                $partialIds[] = $id;
-            } else {
-                for ($i = 2; $i <= $length; $i++) {
-                    $partialIds[] = substr($id, 0, $i);
-                }
-            }
-        }
-
-        return array_values(array_unique($partialIds));
     }
 }
