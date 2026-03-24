@@ -30,6 +30,7 @@ use Apisearch\Context;
 use Apisearch\Model\Product\ProductPrices;
 use Apisearch\Rates\Rate;
 use Apisearch\Rates\Rating;
+use Motive\Prestashop\Model\Product;
 
 class ApisearchBuilder
 {
@@ -306,6 +307,13 @@ class ApisearchBuilder
             }
 
             return false;
+        }
+
+        /**
+         * Let's try with fallback images if there is no image before discarding it
+         */
+        if (empty($img)) {
+            $img = ApisearchImage::getFallbackImage($productId, $context);
         }
 
         if (

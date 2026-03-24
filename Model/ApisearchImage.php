@@ -26,6 +26,8 @@
 
 namespace Apisearch\Model;
 
+use Apisearch\Context;
+
 class ApisearchImage
 {
     public static function getImageTypes()
@@ -58,5 +60,23 @@ class ApisearchImage
         }
 
         return $imageType;
+    }
+
+    /**
+     * @param string $productId
+     * @param Context $context
+     * @return false|string
+     */
+    public static function getFallbackImage(
+        string $productId,
+        Context $context
+    ) {
+        return \Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+            SELECT id_image
+            FROM '._DB_PREFIX_.'image_shop
+            WHERE id_product = '.(int)$productId.'
+            AND id_shop = '.(int)$context->getShopId().'
+            ORDER BY id_image ASC'
+        );
     }
 }
