@@ -44,6 +44,7 @@ function pricesFromProductsId(
 )
 {
     $prices = [];
+    $alternateTaxesContext = $context->alternateTaxes();
     foreach ($productsId as $productId) {
         $priceGroup = ProductPrices::getProductPrices($context, $productId, null, true);
         $price = $priceGroup[0];
@@ -55,6 +56,14 @@ function pricesFromProductsId(
         $oldPriceWithCurrency = $oldPriceGroup[1];
         $oldPriceNoRound = $oldPriceGroup[2];
 
+        $priceGroupAlt = ProductPrices::getProductPrices($alternateTaxesContext, $productId, null, true);
+        $priceAlt = $priceGroupAlt[0];
+        $priceWithCurrencyAlt = $priceGroupAlt[1];
+
+        $oldPriceGroupAlt = ProductPrices::getProductPrices($alternateTaxesContext, $productId, null, false);
+        $oldPriceAlt = $oldPriceGroupAlt[0];
+        $oldPriceWithCurrencyAlt = $oldPriceGroupAlt[1];
+
         $discountPercentage = ProductPrices::getDiscount($priceNoRound, $oldPriceNoRound);
         $withDiscount = $discountPercentage !== null;
 
@@ -64,7 +73,13 @@ function pricesFromProductsId(
             'op' => $oldPrice,
             'op_c' => $oldPriceWithCurrency,
             'wd' => $withDiscount,
-            'dp' => $discountPercentage
+            'dp' => $discountPercentage,
+            'alt' => [
+                'p' => $priceAlt,
+                'p_c' => $priceWithCurrencyAlt,
+                'op' => $oldPriceAlt,
+                'op_c' => $oldPriceWithCurrencyAlt,
+            ]
         ];
     }
 

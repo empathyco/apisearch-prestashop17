@@ -108,6 +108,17 @@ class Context
     }
 
     /**
+     * @return Context
+     */
+    public function alternateTaxes()
+    {
+        $that = clone $this;
+        $that->withTax = !$this->withTax;
+
+        return $that;
+    }
+
+    /**
      * @param Context $context
      * @return void
      * @throws \PrestaShopDatabaseException

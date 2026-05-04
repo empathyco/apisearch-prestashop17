@@ -62,12 +62,11 @@ try {
     $exporter->printItemsByShopAndLang($context);
 
 } catch (\Throwable $exception) {
-    http_response_code(404);
+    http_response_code(500);
     echo json_encode([
         'error' => 1,
         'message' => $exception->getMessage(),
         'line' => $exception->getLine(),
         'file' => $exception->getFile(),
-        'trace' => $exception->getTraceAsString(),
     ]);
 }

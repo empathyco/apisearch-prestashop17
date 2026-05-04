@@ -38,6 +38,7 @@
 				item.metadata.old_price_with_currency = price["pp_c"];
 				item.indexedMetadata.with_discount = price["wd"];
 				item.indexedMetadata.discount_percentage = price["dp"];
+				item.alternate_tax_prices = price["alt"];
 			}
 
 			return item;
