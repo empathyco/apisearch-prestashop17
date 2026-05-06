@@ -41,6 +41,7 @@ class Context
     private $zipcode;
     private $groupId;
     private $userId;
+    private $ids;
 
     public static function fromUrl()
     {
@@ -57,6 +58,7 @@ class Context
         $context->idState = \Tools::getValue('id-state', \Address::initialize()->id_state);
         $context->zipcode = \Tools::getValue('zipcode', \Address::initialize()->postcode);
         $context->groupId = (int) \Configuration::get('PS_UNIDENTIFIED_GROUP');
+        $context->ids = array_filter(explode(',', \Tools::getValue('ids', '')));
 
         return $context;
     }
@@ -72,6 +74,7 @@ class Context
         $context->shopId = \Context::getContext()->shop->id;
         $context->groupId = \Context::getContext()->customer->id_default_group;
         $context->userId = \Context::getContext()->customer->id;
+        $context->ids = array();
 
         // Special scenario
         // Check if the group is included in the groups that, even if is defined that the price should be calculated
@@ -199,6 +202,14 @@ class Context
     }
 
     /**
+     * @return mixed
+     */
+    public function getLanguageIso()
+    {
+        return $this->language->iso_code;
+    }
+
+    /**
      * @return bool
      */
     public function isWithTax()
@@ -281,5 +292,13 @@ class Context
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIds()
+    {
+        return $this->ids;
     }
 }

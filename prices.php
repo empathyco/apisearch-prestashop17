@@ -56,13 +56,23 @@ function pricesFromProductsId(
         $oldPriceWithCurrency = $oldPriceGroup[1];
         $oldPriceNoRound = $oldPriceGroup[2];
 
-        $priceGroupAlt = ProductPrices::getProductPrices($alternateTaxesContext, $productId, null, true);
-        $priceAlt = $priceGroupAlt[0];
-        $priceWithCurrencyAlt = $priceGroupAlt[1];
+        $altPrices = [];
+        $shouldAltPrices = \boolval(Configuration::get('AS_ADD_ALT_PRICES_TO_API'));
+        if ($shouldAltPrices) {
+            $priceGroupAlt = ProductPrices::getProductPrices($alternateTaxesContext, $productId, null, true);
+            $priceAlt = $priceGroupAlt[0];
+            $priceWithCurrencyAlt = $priceGroupAlt[1];
 
-        $oldPriceGroupAlt = ProductPrices::getProductPrices($alternateTaxesContext, $productId, null, false);
-        $oldPriceAlt = $oldPriceGroupAlt[0];
-        $oldPriceWithCurrencyAlt = $oldPriceGroupAlt[1];
+            $oldPriceGroupAlt = ProductPrices::getProductPrices($alternateTaxesContext, $productId, null, false);
+            $oldPriceAlt = $oldPriceGroupAlt[0];
+            $oldPriceWithCurrencyAlt = $oldPriceGroupAlt[1];
+            $altPrices = [
+                'p' => $priceAlt,
+                'p_c' => $priceWithCurrencyAlt,
+                'op' => $oldPriceAlt,
+                'op_c' => $oldPriceWithCurrencyAlt,
+            ];
+        }
 
         $discountPercentage = ProductPrices::getDiscount($priceNoRound, $oldPriceNoRound);
         $withDiscount = $discountPercentage !== null;
@@ -74,12 +84,7 @@ function pricesFromProductsId(
             'op_c' => $oldPriceWithCurrency,
             'wd' => $withDiscount,
             'dp' => $discountPercentage,
-            'alt' => [
-                'p' => $priceAlt,
-                'p_c' => $priceWithCurrencyAlt,
-                'op' => $oldPriceAlt,
-                'op_c' => $oldPriceWithCurrencyAlt,
-            ]
+            'alt' => $altPrices,
         ];
     }
 

@@ -30,7 +30,6 @@ use Apisearch\Context;
 use Apisearch\Model\Product\ProductPrices;
 use Apisearch\Rates\Rate;
 use Apisearch\Rates\Rating;
-use Motive\Prestashop\Model\Product;
 
 class ApisearchBuilder
 {

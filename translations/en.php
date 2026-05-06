@@ -53,6 +53,9 @@ $_MODULE['<{apisearch}prestashop>apisearch_d681b74ce63df54632ddb4e8d2159296'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_1ee0fd5d781b764c853708c2b686ddf6'] = 'Not available when stock is 0';
 $_MODULE['<{apisearch}prestashop>apisearch_80af7c41efc5e4c83862bc60a28a2582'] = 'Regardless of the online store settings, when a product has 0 stock, mark it as unavailable. This setting only affects the search.';
 
+$_MODULE['<{apisearch}prestashop>apisearch_c7374df9654f73ec48c4fa0ee9b9698d'] = 'Enable alternative prices in the API';
+$_MODULE['<{apisearch}prestashop>apisearch_e3f106cb882c8a048560eb0c368914e7'] = 'Enable alternative prices with VAT in the prices API. Required to display prices with and without VAT depending on the user viewing the search. Requires enabling real-time prices.';
+
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Yes';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';
 $_MODULE['<{apisearch}prestashop>apisearch_43781db5c40ecc39fd718685594f0956'] = 'Save';

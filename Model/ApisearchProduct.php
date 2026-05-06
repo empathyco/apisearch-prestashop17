@@ -109,6 +109,8 @@ class ApisearchProduct
             ;
         ";
 
+        // Revisar linea 104 - Falta el id_shop en la consulta, revisar si es necesario agregarlo
+
         $products = \Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql, true, false);
         $productsIndexedById = [];
         $manufacturers = ApisearchManufacturer::getManufacturers(array_column($products, 'id_manufacturer'), $context);

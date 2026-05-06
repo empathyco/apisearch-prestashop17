@@ -49,4 +49,5 @@ class ApisearchDefaults
     const AS_PARTIAL_IDS = false;
     const AS_DEGRADE_NOT_AVAILABLE = true;
     const AS_STOCK_0_AS_NOT_AVAILABLE = false;
+    const AS_ADD_ALT_PRICES_TO_API = false;
 }

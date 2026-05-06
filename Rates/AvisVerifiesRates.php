@@ -28,33 +28,47 @@ namespace Apisearch\Rates;
 
 use Apisearch\Context;
 
-class Rating
+class AvisVerifiesRates implements IntegrationRates
 {
     /**
-     * @var IntegrationRates
+     * @return bool
      */
-    private static $ratingService = null;
-
-    public static function load()
+    public static function isValid()
     {
-        $all = [
-            SteavisgarantisRates::class,
-            AvisVerifiesRates::class,
-        ];
+        $prefix = _DB_PREFIX_;
+        $result = \Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS(
+            "
+                SELECT 1
+                FROM information_schema.tables
+                WHERE table_name = '{$prefix}av_products_average'", true, false);
 
-        foreach ($all as $integration) {
-            if ($integration::isValid()) {
-                self::$ratingService = $integration;
-            }
-        }
+        return !empty($result);
     }
 
-    public static function getRatings(Context $context, array $ids)
+    /**
+     * @param Context $context
+     * @param array $ids
+     * @return Rate[]
+     * @throws \PrestaShopDatabaseException
+     */
+    public static function loadRates(Context $context, array $ids)
     {
-        if (!self::$ratingService) {
-            return [];
+        $prefix = _DB_PREFIX_;
+        $productIdsAsString = implode(',', $ids);
+        $result = \Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS(
+            "
+                SELECT id_product_av as product_id, rate, nb_reviews as reviews_nb
+                FROM {$prefix}av_products_average
+                WHERE id_product_av IN ($productIdsAsString)
+                AND iso_lang = '{$context->getLanguageIso()}'
+                AND id_shop = {$context->getShopId()}
+                ", true, false);
+
+        $indexed = [];
+        foreach ($result as $item) {
+            $indexed[$item['product_id']] = new Rate(\intval($item['rate']), \intval($item['reviews_nb']));
         }
 
-        return self::$ratingService::loadRates($context, $ids);
+        return $indexed;
     }
 }

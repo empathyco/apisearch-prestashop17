@@ -78,6 +78,7 @@ class Apisearch extends Module
         Configuration::updateValue('AS_PARTIAL_IDS', ApisearchDefaults::AS_PARTIAL_IDS);
         Configuration::updateValue('AS_DEGRADE_NOT_AVAILABLE', ApisearchDefaults::AS_DEGRADE_NOT_AVAILABLE);
         Configuration::updateValue('AS_STOCK_0_AS_NOT_AVAILABLE', ApisearchDefaults::AS_STOCK_0_AS_NOT_AVAILABLE);
+        Configuration::updateValue('AS_ADD_ALT_PRICES_TO_API', ApisearchDefaults::AS_ADD_ALT_PRICES_TO_API);
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -113,6 +114,7 @@ class Apisearch extends Module
         Configuration::deleteByName('AS_PARTIAL_IDS');
         Configuration::deleteByName('AS_DEGRADE_NOT_AVAILABLE');
         Configuration::deleteByName('AS_STOCK_0_AS_NOT_AVAILABLE');
+        Configuration::deleteByName('AS_ADD_ALT_PRICES_TO_API');
 
         return parent::uninstall();
     }
@@ -595,6 +597,26 @@ class Apisearch extends Module
                         )
                     ),
                 ),
+                array(
+                    'col' => 3,
+                    'type' => 'switch',
+                    'label' => $this->l('add_alt_prices_to_api'),
+                    'name' => 'AS_ADD_ALT_PRICES_TO_API',
+                    'desc' => $this->l('add_alt_prices_to_api_help'),
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('yes')
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('no')
+                        )
+                    ),
+                ),
             ),
             'buttons' => array(
                 array(
@@ -642,6 +664,7 @@ class Apisearch extends Module
             'AS_DYNAMIC_JS' => Configuration::get('AS_DYNAMIC_JS'),
             'AS_PARTIAL_IDS' => Configuration::get('AS_PARTIAL_IDS'),
             'AS_STOCK_0_AS_NOT_AVAILABLE' => Configuration::get('AS_STOCK_0_AS_NOT_AVAILABLE'),
+            'AS_ADD_ALT_PRICES_TO_API' => Configuration::get('AS_ADD_ALT_PRICES_TO_API'),
         );
 
         foreach ($this->context->controller->getLanguages() as $language) {

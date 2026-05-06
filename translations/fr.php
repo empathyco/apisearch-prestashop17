@@ -52,6 +52,8 @@ $_MODULE['<{apisearch}prestashop>apisearch_0950e4c2b66c7965f30a0f517699976a'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_d681b74ce63df54632ddb4e8d2159296'] = 'Placez en dernière position les produits qui ne peuvent pas être vendus. Les modifications de cette option nécessitent une réindexation';
 $_MODULE['<{apisearch}prestashop>apisearch_1ee0fd5d781b764c853708c2b686ddf6'] = 'Indisponible lorsque le stock est à 0';
 $_MODULE['<{apisearch}prestashop>apisearch_80af7c41efc5e4c83862bc60a28a2582'] = 'Indépendamment des paramètres de la boutique en ligne, lorsqu’un produit a un stock de 0, marquez-le comme indisponible. Ce paramètre n’affecte que le moteur de recherche.';
+$_MODULE['<{apisearch}prestashop>apisearch_c7374df9654f73ec48c4fa0ee9b9698d'] = 'Activer les prix alternatifs dans l\'API';
+$_MODULE['<{apisearch}prestashop>apisearch_e3f106cb882c8a048560eb0c368914e7'] = 'Active les prix avec TVA alternative dans l\'API des prix. Nécessaire pour afficher les prix avec et sans TVA en fonction de l\'utilisateur qui consulte le moteur de recherche. Requiert l\'activation des prix en temps réel.';
 
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Oui';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'Non';

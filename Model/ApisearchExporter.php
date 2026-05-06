@@ -46,6 +46,12 @@ class ApisearchExporter
         $offset = 0;
         usleep(100000);
 
+        $ids = $context->getIds();
+        if (!empty($ids)) {
+            $this->printItems($ids, $context);
+            return;
+        }
+
         while (true) {
             $products = ApisearchProduct::getProductsId($offset, $count, $context);
 
@@ -53,37 +59,7 @@ class ApisearchExporter
                 $productsIds = array_map(function(array $product) {
                     return $product['id_product'];
                 }, $products);
-
-                if ($context->isDebug()) {
-                    echo json_encode([
-                        'debug' => 'initial products list',
-                        'ids' => $productsIds
-                    ]);
-                    echo PHP_EOL;
-                    ob_flush();
-                }
-
-                $this->builder->buildChunkItems($productsIds, $context, function(array $items) use ($context) {
-                    foreach ($items as $item) {
-                        $json = json_encode($item, JSON_PARTIAL_OUTPUT_ON_ERROR);
-                        if ($json === false) {
-                            if ($context->isDebug()) {
-                                echo json_encode([
-                                    'debug' => 'error on json_encode',
-                                    'error_msg' => json_last_error_msg(),
-                                ], JSON_PARTIAL_OUTPUT_ON_ERROR);
-                                echo PHP_EOL;
-                                ob_flush();
-                            }
-
-                            continue;
-                        }
-
-                        echo $json . PHP_EOL;
-                        ob_flush();
-                    }
-                });
-
+                $this->printItems($productsIds, $context);
                 $offset = $offset + $count;
             } else {
                 if ($context->isDebug()) {
@@ -96,5 +72,42 @@ class ApisearchExporter
                 break;
             }
         }
+    }
+
+    /**
+     * @param array $productsIds
+     * @param Context $context
+     */
+    private function printItems(array $productsIds, Context $context)
+    {
+        if ($context->isDebug()) {
+            echo json_encode([
+                'debug' => 'initial products list',
+                'ids' => $productsIds
+            ]);
+            echo PHP_EOL;
+            ob_flush();
+        }
+
+        $this->builder->buildChunkItems($productsIds, $context, function(array $items) use ($context) {
+            foreach ($items as $item) {
+                $json = json_encode($item, JSON_PARTIAL_OUTPUT_ON_ERROR);
+                if ($json === false) {
+                    if ($context->isDebug()) {
+                        echo json_encode([
+                            'debug' => 'error on json_encode',
+                            'error_msg' => json_last_error_msg(),
+                        ], JSON_PARTIAL_OUTPUT_ON_ERROR);
+                        echo PHP_EOL;
+                        ob_flush();
+                    }
+
+                    continue;
+                }
+
+                echo $json . PHP_EOL;
+                ob_flush();
+            }
+        });
     }
 }

@@ -53,6 +53,9 @@ $_MODULE['<{apisearch}prestashop>apisearch_d681b74ce63df54632ddb4e8d2159296'] = 
 $_MODULE['<{apisearch}prestashop>apisearch_1ee0fd5d781b764c853708c2b686ddf6'] = 'No disponible quan l’estoc és 0';
 $_MODULE['<{apisearch}prestashop>apisearch_80af7c41efc5e4c83862bc60a28a2582'] = 'Independentment de la configuració de la botiga online, quan un producte estigui amb estoc 0, marca’l com a no disponible. Aquesta configuració només afecta al cercador.';
 
+$_MODULE['<{apisearch}prestashop>apisearch_c7374df9654f73ec48c4fa0ee9b9698d'] = 'Activar preus alternatius a l\'API';
+$_MODULE['<{apisearch}prestashop>apisearch_e3f106cb882c8a048560eb0c368914e7'] = 'Activa els preus amb IVA altern a l\'API de preus. Necessari per a mostrar preus amb i sense IVA en funció de l\'usuari que visualitza el cercador. Requereix l\'activació dels preus en temps real.';
+
 $_MODULE['<{apisearch}prestashop>apisearch_a6105c0a611b41b08f1209506350279e'] = 'Si';
 $_MODULE['<{apisearch}prestashop>apisearch_7fa3b767c460b54a2be4d49030b349c7'] = 'No';
 $_MODULE['<{apisearch}prestashop>apisearch_43781db5c40ecc39fd718685594f0956'] = 'Guardar';
