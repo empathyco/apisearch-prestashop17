@@ -61,7 +61,7 @@ class AvisVerifiesRates implements IntegrationRates
                 FROM {$prefix}av_products_average
                 WHERE ref_product IN ($productIdsAsString)
                 AND iso_lang IN ('{$context->getLanguageIso()}', '0')
-                AND id_shop = {$context->getShopId()}
+                AND id_shop IN ({$context->getShopId()}, 0)
                 ", true, false);
 
         $indexed = [];

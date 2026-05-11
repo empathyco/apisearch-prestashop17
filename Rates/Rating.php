@@ -45,6 +45,7 @@ class Rating
         foreach ($all as $integration) {
             if ($integration::isValid()) {
                 self::$ratingService = $integration;
+                return;
             }
         }
     }
