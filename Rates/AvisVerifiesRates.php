@@ -57,7 +57,7 @@ class AvisVerifiesRates implements IntegrationRates
         $productIdsAsString = implode(',', $ids);
         $result = \Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS(
             "
-                SELECT id_product_av as product_id, rate, nb_reviews as reviews_nb
+                SELECT ref_product as product_id, rate, nb_reviews as reviews_nb
                 FROM {$prefix}av_products_average
                 WHERE ref_product IN ($productIdsAsString)
                 AND iso_lang IN ('{$context->getLanguageIso()}', '0')
