@@ -59,8 +59,8 @@ class AvisVerifiesRates implements IntegrationRates
             "
                 SELECT id_product_av as product_id, rate, nb_reviews as reviews_nb
                 FROM {$prefix}av_products_average
-                WHERE id_product_av IN ($productIdsAsString)
-                AND iso_lang = '{$context->getLanguageIso()}'
+                WHERE ref_product IN ($productIdsAsString)
+                AND iso_lang IN ('{$context->getLanguageIso()}', '0')
                 AND id_shop = {$context->getShopId()}
                 ", true, false);
 
