@@ -137,8 +137,8 @@ class ApisearchProduct
         }
 
         $sql = "
-            SELECT p.id_product, 
-                group_concat(distinct(cp.id_category)) as cp_id_categories, 
+            SELECT p.id_product,
+                group_concat(distinct(cp.id_category)) as cp_id_categories,
                 group_concat(distinct(t.name)) as tag_names,
                 group_concat(distinct fp.id_feature, '~~', fp.id_feature_value SEPARATOR '|') as features,
                 group_concat(distinct fl.id_feature, '~~',  fl.name SEPARATOR '|') as features_lang,
@@ -282,7 +282,7 @@ class ApisearchProduct
         $sql = "
             SELECT
                 pa.*,
-                ag.`id_attribute_group`, 
+                ag.`id_attribute_group`,
                 ag.`is_color_group`,
                 agl.`name` AS group_name,
                 al.`name` AS attribute_name,
@@ -362,7 +362,7 @@ class ApisearchProduct
             LEFT JOIN `' . _DB_PREFIX_ . 'image_lang` il ON (il.`id_image` = pai.`id_image`)
             LEFT JOIN `' . _DB_PREFIX_ . 'image` i ON (i.`id_image` = pai.`id_image`)
             WHERE pai.`id_product_attribute` IN (' . implode(',', $attributes) . ') AND il.`id_lang` = ' . (int) $idLang . ' ORDER by i.`position`'
-        );
+        , true, false);
 
         $images = array();
         foreach ($result as $item) {
