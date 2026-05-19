@@ -26,6 +26,19 @@
 
 set_time_limit(1800);
 
+register_shutdown_function(function() {
+    $error = error_get_last();
+    var_dump($error);
+    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+        echo json_encode([
+            'fatal' => 1,
+            'message' => $error['message'],
+            'file' => $error['file'],
+            'line' => $error['line'],
+        ]);
+    }
+});
+
 /**
  * We suppress all possible incoming output data to avoid malformed feed
  */
@@ -45,7 +58,6 @@ try {
 
     ob_end_clean();
     header('Content-Type:text/plain; charset=utf-8');
-
     Rating::load();
     $exporter = new ApisearchExporter(new ApisearchBuilder());
     $context = Context::fromUrl();
