@@ -61,6 +61,7 @@ class ApisearchExporter
                 }, $products);
                 $this->printItems($productsIds, $context);
                 $offset = $offset + $count;
+                \Product::resetStaticCache();
             } else {
                 if ($context->isDebug()) {
                     echo json_encode([
