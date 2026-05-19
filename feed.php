@@ -28,7 +28,6 @@ set_time_limit(1800);
 
 register_shutdown_function(function() {
     $error = error_get_last();
-    var_dump($error);
     if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
         echo json_encode([
             'fatal' => 1,
