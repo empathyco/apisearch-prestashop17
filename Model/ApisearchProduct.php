@@ -27,6 +27,7 @@
 namespace Apisearch\Model;
 
 use Apisearch\Context;
+use Apisearch\Model\Product\ProductPrices;
 
 class ApisearchProduct
 {
@@ -262,6 +263,7 @@ class ApisearchProduct
     }
 
     /**
+     * @param $context
      * @param $productId
      * @param $idLang
      * @param $idShop
@@ -269,7 +271,7 @@ class ApisearchProduct
      * @return array|bool|\mysqli_result|\PDOStatement|resource
      * @throws \PrestaShopDatabaseException
      */
-    public static function getAttributeCombinations($productId, $idLang, $idShop, $colorToFilterBy)
+    public static function getAttributeCombinations($context, $productId, $idLang, $idShop, $colorToFilterBy)
     {
         if (!\Combination::isFeatureActive()) {
             return [];
@@ -341,9 +343,25 @@ class ApisearchProduct
             }
         }
 
+        // We get all product_id  + id_product_attribute combination and we get the quantity
+        $allAttributesId = [];
+        foreach ($res as $key => $row) {
+            $idProductAttribute = \intval($row['id_product_attribute']);
+            if (array_key_exists($idProductAttribute, $allAttributesId)) {
+                continue;
+            }
+
+            $allAttributesId[$idProductAttribute] = [
+                'quantity' => \StockAvailable::getQuantityAvailableByProduct($productId, $idProductAttribute),
+                'prices_group' => ProductPrices::getProductPrices($context, $productId, $idProductAttribute, true)
+            ];
+        }
+
         //Get quantity of each variation
         foreach ($res as $key => $row) {
-            $res[$key]['quantity'] = \StockAvailable::getQuantityAvailableByProduct(\intval($row['id_product']), \intval($row['id_product_attribute']));
+            $idProductAttribute = \intval($row['id_product_attribute']);
+            $res[$key]['quantity'] = $allAttributesId[$idProductAttribute]['quantity'];
+            $res[$key]['prices_group'] = $allAttributesId[$idProductAttribute]['prices_group'];
         }
 
         return $res;

@@ -192,7 +192,7 @@ class ApisearchBuilder
         $hasCombinations = false;
 
         if ($productShouldHaveCombinations) {
-            $combinations = ApisearchProduct::getAttributeCombinations($productId, $langId, $context->getShopId(), $colorToFilterBy);
+            $combinations = ApisearchProduct::getAttributeCombinations($context, $productId, $langId, $context->getShopId(), $colorToFilterBy);
             $hasCombinations = count($combinations) > 0;
         }
 
@@ -237,7 +237,7 @@ class ApisearchBuilder
                     }
                 }
 
-                $combinationPriceGroup = ProductPrices::getProductPrices($context, $productId, $combination['id_product_attribute'], true);
+                $combinationPriceGroup = $combination['prices_group'];
                 $combinationPrice = $combinationPriceGroup[0];
 
                 if ($minPrice > $combinationPrice) {

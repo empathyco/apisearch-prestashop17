@@ -62,10 +62,11 @@ class ProductPrices
             $context->getCurrency()->id, $groupId, 1,
             $resolvedWithTax, 6, false, $reduction, true, $specPrice, true, $userId
         );
+
         $price = \Tools::convertPrice($price, $context->getCurrency());
         $numberOfDecimals = \Configuration::get('AS_DEFAULT_ROUND_DECIMALS', null, null, null, ApisearchDefaults::AS_DEFAULT_ROUND_DECIMALS);
         $priceRounder = \round($price, \intval($numberOfDecimals));
-        $priceWithCurrency = \Tools::displayPrice($priceRounder, $context->getCurrency());
+        $priceWithCurrency = $context->getLocale()->formatPrice($priceRounder, $context->getCurrency()->iso_code);
 
         return array($priceRounder, $priceWithCurrency, $price);
     }

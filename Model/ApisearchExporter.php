@@ -27,6 +27,7 @@
 namespace Apisearch\Model;
 
 use Apisearch\Context;
+use SpecificPrice;
 
 class ApisearchExporter
 {
@@ -62,6 +63,7 @@ class ApisearchExporter
                 $this->printItems($productsIds, $context);
                 $offset = $offset + $count;
                 \Product::resetStaticCache();
+                \SpecificPrice::flushCache();
             } else {
                 if ($context->isDebug()) {
                     echo json_encode([

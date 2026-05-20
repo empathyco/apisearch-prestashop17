@@ -42,6 +42,7 @@ class Context
     private $groupId;
     private $userId;
     private $ids;
+    private $locale;
 
     public static function fromUrl()
     {
@@ -59,6 +60,7 @@ class Context
         $context->zipcode = \Tools::getValue('zipcode', \Address::initialize()->postcode);
         $context->groupId = (int) \Configuration::get('PS_UNIDENTIFIED_GROUP');
         $context->ids = array_filter(explode(',', \Tools::getValue('ids', '')));
+        $context->locale = \Tools::getContextLocale(\Context::getContext());
 
         return $context;
     }
@@ -106,6 +108,7 @@ class Context
         $context->idCountry = $address->id_country;
         $context->idState = $address->id_state;
         $context->zipcode = $address->postcode;
+        $context->locale = \Tools::getContextLocale(\Context::getContext());
 
         return $context;
     }
@@ -300,5 +303,13 @@ class Context
     public function getIds()
     {
         return $this->ids;
+    }
+
+    /**
+     * @return \Locale
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }
